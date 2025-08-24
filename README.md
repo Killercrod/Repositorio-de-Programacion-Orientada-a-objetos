@@ -1,4 +1,4 @@
-# Repositorio-de-Programaci-n-Orientada-a-objetos
+# Repositorio de programacion orientada a objetos
 
 Hola!! En este repositorio les explicaremos todo acerca del desarrollo de nuestro proyecto de programacion orientada a objetos les mostraremos desde nuestras expectativas, avances, metas y un registro paso paso acera de todo lo que estaremos trabajando 
 
