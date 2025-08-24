@@ -41,6 +41,7 @@ Nosotros trabajaremos a base de sprints de una semana en donde haremos tres fase
 
 //Poner liga aqui
 
-Weeklies
+## Weeklies:
+
 // Poner liga aqui
 
