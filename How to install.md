@@ -15,7 +15,7 @@ Este documento explica cómo configurar e instalar **OpenCV** en **Python**, tan
 ## 🍏 Instalación en Mac
 
 ### 1. Instalar Xcode Command Line Tools
-```bash
+``` 
 xcode-select --install
 2. Instalar Homebrew
 Si no lo tienes instalado:
