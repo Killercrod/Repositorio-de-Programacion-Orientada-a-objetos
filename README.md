@@ -65,7 +65,8 @@ Sistemas inteligentes: Utilización de OCR y reconocimiento de patrones
 Arquitectura de sistemas: Diseño de sistema en tiempo real con componentes especializados
 ## Requerimientos funcionales y no funcionales:
 
-//Poner la liga
+[Requerimientos](#requerimientos-funcionales-y-no-funcionales)
+
 
 ## Rango y usuarios:
 
