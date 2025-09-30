@@ -17,23 +17,41 @@ Como usuario, quiero ver indicadores gráficos de estado y resultados para enten
 
 # Requisitos No Funcionales (RNF)
 
-RNF-001: Rendimiento
+RNF-001: Validacion de ID
 
-Tiempo de procesamiento por frame < 100ms
-Categoría: Eficiencia
-RNF-002: Precisión
+El sistema debe verificar que la imagen corresponda a una identificación oificiks 
+válida 
+El sistema debe rechazar imágenes que no contengan un documento válido 
+Captura de imágenes
+El sistema debe permitir la toma de fotografías de la identificación oficial mediante 
+cámara integrada 
 
-Tasa de reconocimiento correcto > 85% en condiciones óptimas
-Categoría: Fiabilidad
-RNF-003: Compatibilidad
+RNF-002: Reconocimiento de texto (OCR)
 
-Funcionamiento en sistemas macOS con configuración específica de Tesseract
-Categoría: Portabilidad
+El sistema debe limitar el reconocimiento de texto únicamente al idioma español
+El sistema debe procesar la imagen de la identificación para extraer el texto 
+mediante el OCR.
+El sistema debe garantizar que el texto extraído se guarde en un formato 
+estructurado (por ejemplo, JSON)
+
+RNF-003:Detección de palabras clave
+
+El sistema debe identificar y extraer campos relevantes de la identificación, como 
+Nombre, CURP, Fecha de nacimiento, etc.
+El sistema debe validar que los campos detectados correspondan a un formato 
+correcto (por ejemplo, que la CURP tenga 18 caracteres válidos, que la fecha esté 
+en formato día,mes,año.
+
+RNF-004: Almacenamiento de información
+
+El sistema debe guardar tanto las imágenes originales como el texto 
+reconocido en un repositorio local
+
 Priorización
 
 Método: MoSCoW
 
-Must have: RF-001, RF-002, RF-003 (funcionalidad básica)
-Should have: RF-004 (mejora experiencia usuario)
+Must have: RF-001, RF-002, RF-003 (funcionalidad base)
+Should have: RF-004 (flexibilidad de almacenamiento local)
 Could have: Reconocimiento de múltiples tipos de documentos
 Won't have: Almacenamiento de datos personales
