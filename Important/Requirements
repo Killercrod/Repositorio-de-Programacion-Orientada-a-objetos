@@ -1,6 +1,6 @@
-Requisitos
+## Requisitos
 
-Requisitos Funcionales (RF)
+# Requisitos Funcionales (RF)
 
 RF-001: Captura de video en tiempo real
 
@@ -14,7 +14,8 @@ Como sistema, quiero identificar campos específicos (NOMBRE, DOMICILIO, CURP, F
 RF-004: Interfaz de usuario visual
 
 Como usuario, quiero ver indicadores gráficos de estado y resultados para entender el proceso de verificación
-Requisitos No Funcionales (RNF)
+
+# Requisitos No Funcionales (RNF)
 
 RNF-001: Rendimiento
 
