@@ -50,7 +50,19 @@ Requiere configuración específica de Tesseract OCR
 Reconocimiento limitado al formato actual de INE
 Procesamiento en tiempo real puede variar según hardware
 
+## Competencias
 
+# Genéricas
+
+Trabajo en equipo: Coordinación en la integración de componentes del sistema
+Comunicación efectiva: Documentación clara del proceso y configuración
+Resolución de problemas: Manejo de desafíos en el procesamiento de imágenes
+# Específicas
+
+Ingeniería de software: Aplicación de principios de modularidad y encapsulamiento
+Procesamiento digital de imágenes: Implementación de filtros y técnicas de mejora de imagen
+Sistemas inteligentes: Utilización de OCR y reconocimiento de patrones
+Arquitectura de sistemas: Diseño de sistema en tiempo real con componentes especializados
 ## Requerimientos funcionales y no funcionales:
 
 //Poner la liga
