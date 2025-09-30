@@ -1,1 +1,38 @@
+Requisitos
 
+Requisitos Funcionales (RF)
+
+RF-001: Captura de video en tiempo real
+
+Como usuario del sistema, quiero que la cámara capture video continuamente para procesar documentos en tiempo real
+RF-002: Procesamiento de imagen para OCR
+
+Como sistema, quiero aplicar filtros de escala de grises, desenfoque y umbralización adaptativa para optimizar el reconocimiento de texto
+RF-003: Reconocimiento de patrones de INE
+
+Como sistema, quiero identificar campos específicos (NOMBRE, DOMICILIO, CURP, FECHA DE NACIMIENTO) para validar autenticidad del documento
+RF-004: Interfaz de usuario visual
+
+Como usuario, quiero ver indicadores gráficos de estado y resultados para entender el proceso de verificación
+Requisitos No Funcionales (RNF)
+
+RNF-001: Rendimiento
+
+Tiempo de procesamiento por frame < 100ms
+Categoría: Eficiencia
+RNF-002: Precisión
+
+Tasa de reconocimiento correcto > 85% en condiciones óptimas
+Categoría: Fiabilidad
+RNF-003: Compatibilidad
+
+Funcionamiento en sistemas macOS con configuración específica de Tesseract
+Categoría: Portabilidad
+Priorización
+
+Método: MoSCoW
+
+Must have: RF-001, RF-002, RF-003 (funcionalidad básica)
+Should have: RF-004 (mejora experiencia usuario)
+Could have: Reconocimiento de múltiples tipos de documentos
+Won't have: Almacenamiento de datos personales
