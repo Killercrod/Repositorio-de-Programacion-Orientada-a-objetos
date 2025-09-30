@@ -65,7 +65,7 @@ Sistemas inteligentes: Utilización de OCR y reconocimiento de patrones
 Arquitectura de sistemas: Diseño de sistema en tiempo real con componentes especializados
 ## Requerimientos funcionales y no funcionales:
 
-[Requerimientos]([#requerimientos-funcionales-y-no-funcionales](https://github.com/Killercrod/Repositorio-de-Programacion-Orientada-a-objetos/blob/main/Important/Requirements.md))
+[Ver requerimientos](Important/Requirements.md)
 
 
 ## Rango y usuarios:
