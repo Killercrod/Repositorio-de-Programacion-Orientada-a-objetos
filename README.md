@@ -28,6 +28,28 @@ Nosotros trabajaremos a base de sprints de una semana en donde haremos tres fase
 2.- Segunda fase: Haremos un registro de cada cosa que se trabaje y agregue cada una de las tareas ya asignadas.
 
 3.- Tercera fase: Haremos una reunion evaluando si se terminaron las metas, si hace falta algo reagendarlo a la siguiente semana con maxima prioridad y por ultimo platicaremos de las posibles mejoras en los procesos de trabajo.
+Indicador	Descripción
+Producto	Descripción de Producto	Se identifica de forma clara y específica el objetivo del producto. Se definen alcances y limitaciones.
+Propuesta de Valor	Es clara la propuesta de valor del producto. Es clara la diferencia del producto con respecto a otras propuestas existentes. ¿Qué incluye este producto que no hacen otros? ¿En una necesidad identificada? ¿Por qué se podrían considerar de valor la propuesta?
+
+## Producto
+
+Descripción: Sistema de reconocimiento óptico de caracteres (OCR) para identificación automática de documentos oficiales mexicanos (INE) mediante procesamiento de imágenes en tiempo real.
+
+# Alcances:
+
+Captura de video en tiempo real con interfaz gráfica
+Procesamiento de imágenes para extracción de texto
+Identificación de documentos INE mediante patrones específicos
+Interfaz visual con indicadores de estado
+
+# Limitaciones:
+
+Dependencia de condiciones de iluminación óptimas
+Requiere configuración específica de Tesseract OCR
+Reconocimiento limitado al formato actual de INE
+Procesamiento en tiempo real puede variar según hardware
+
 
 ## Requerimientos funcionales y no funcionales:
 
@@ -41,7 +63,7 @@ Nosotros trabajaremos a base de sprints de una semana en donde haremos tres fase
 
 //Poner liga aqui
 
-## Weeklies:
+## Bitacora:
 
 // Poner liga aqui
 
