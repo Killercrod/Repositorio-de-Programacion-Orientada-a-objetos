@@ -1,6 +1,6 @@
-Propuesta de Valor
+## Propuesta de Valor
 
-Diferenciadores competitivos:
+# Diferenciadores competitivos:
 
 Automatización en tiempo real: Mientras otras soluciones requieren escaneo estático, nuestro sistema procesa video en vivo
 
