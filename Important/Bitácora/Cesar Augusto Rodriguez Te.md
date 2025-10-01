@@ -47,4 +47,5 @@ a09e5e7 - Create Raul Arturo Cervera Shiels (Killercrod)
 🗓️ Hace 10 horas
 
 d38dc20 - Create GUION ESPANIOL (Killercrod)
+7430c78 - Update README.md (BraulioTelloMancilla)
 99323a9 - Create SCRIPT (Killercrod)
