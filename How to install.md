@@ -36,7 +36,7 @@ print(cv2.__version__)
 Ejecuta:
 python3 test.py
 Si aparece la versión de OpenCV, la instalación fue exitosa ✅
-🪟 Instalación en Windows
+## 🪟 Instalación en Windows
 1. Instalar Python
 Descarga la última versión desde la página oficial:
 👉 https://www.python.org/downloads/
