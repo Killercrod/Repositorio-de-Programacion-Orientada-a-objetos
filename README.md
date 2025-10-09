@@ -64,6 +64,7 @@ Ingeniería de software: Aplicación de principios de modularidad y encapsulamie
 Procesamiento digital de imágenes: Implementación de filtros y técnicas de mejora de imagen
 Sistemas inteligentes: Utilización de OCR y reconocimiento de patrones
 Arquitectura de sistemas: Diseño de sistema en tiempo real con componentes especializados
+
 ## Requerimientos funcionales y no funcionales:
 
 [Ver Requerimientos](Important/Requirements.md)
@@ -77,7 +78,8 @@ Arquitectura de sistemas: Diseño de sistema en tiempo real con componentes espe
 
 [Bitacoras independientes](Important/Bitácora)
 
-##Tutorial de openCV
+##Tutorial de openCV:
+
 [Tutorial de openCV](https://docs.opencv.org/4.x/d6/d00/tutorial_py_root.html)
 
 
