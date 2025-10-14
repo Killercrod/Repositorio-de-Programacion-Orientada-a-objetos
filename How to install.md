@@ -36,7 +36,9 @@ print(cv2.__version__)
 Ejecuta:
 python3 test.py
 Si aparece la versión de OpenCV, la instalación fue exitosa ✅
+```
 ## 🪟 Instalación en Windows
+``` bash
 1. Instalar Python
 Descarga la última versión desde la página oficial:
 👉 https://www.python.org/downloads/
@@ -61,7 +63,9 @@ print(cv2.__version__)
 Ejecuta:
 python test.py
 Si aparece la versión, OpenCV quedó correctamente instalado 🎉
-⚡ Notas adicionales
+```
+⚡ Notas adicionales:
+
 Si usas Anaconda, puedes instalar OpenCV con:
 conda install -c conda-forge opencv
 En caso de errores con permisos, puedes agregar --user al instalar con pip:
