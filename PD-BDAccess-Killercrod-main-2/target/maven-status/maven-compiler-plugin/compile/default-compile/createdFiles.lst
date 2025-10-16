@@ -1,0 +1,6 @@
+model/Person.class
+bd/PersonRepository.class
+controller/PersonController.class
+view/PersonView.class
+bd/Database.class
+app/App.class
