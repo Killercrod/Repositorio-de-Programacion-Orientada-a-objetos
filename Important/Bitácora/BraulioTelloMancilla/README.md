@@ -25,6 +25,6 @@
   In the first weeks of the month i focused on learning how the code works and how to make it function on my laptop, that's why i created the tutorial on how to run the app on windows, going from everything you need to download to how to run the app and how to organizate it
   Then i created an example or more like a "demo" of how to make the link between the HTML and the JAVA app, making a little project with SpringBoot where you introduce your name and it loads a message and show the name added on the terminal, so with this knowledge i will apply it to the real project and make the configurations nedded (also the explanation).
   
-  [Version 0 document](Important/Bitácora/BraulioTelloMancilla/version0) This code is what i've been working on the last days, it conects the html with a java code, using Spring Boot framework.
+  [Version 0 document](Important/Bitácora/BraulioTelloMancilla/version_0) This code is what i've been working on the last days, it conects the html with a java code, using Spring Boot framework.
   For make the JAVA code a Web Controller, i use some of the Spring tools like @RestController (For identify the java as the web controller), @RequestParameters (For call the parameters) and using some others like fetch API that allows to send and request data from the server (JAVA code), in less words it comunicate the frontend with the backend.
 </details>
