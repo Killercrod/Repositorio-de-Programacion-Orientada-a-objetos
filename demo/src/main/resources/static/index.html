@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Formulario de Registro</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header><head_title>Formulario</head_title></header>
+  <main>
+    <form class="formulario">
+      <div class="fila">
+        <div class="campo">
+          <!----------------------------NOMBRE---------------------------------------->
+          <label>Nombre(s)<span>*</span></label>
+          <input id="nombre" type="text" required>
+        </div>
+        <div class="campo">
+          <!----------------------------APELLIDO PATERNO---------------------------------------->
+          <label>Apellido Paterno<span>*</span></label>
+          <input id="apePater" type="text" required>
+        </div>
+        <div class="campo">
+          <!-----------------------------APELLIDO MATERNO--------------------------------------->
+          <label>Apellido Materno</label>
+          <input id="apeMater" type="text">
+        </div>
+      </div>
+
+      <div class="fila">
+        <div class="campo">
+          <!------------------------------CURP-------------------------------------->
+          <label>CURP<span>*</span></label>
+          <input type="text" required>
+        </div>
+      </div>
+
+      <div class="fila">
+        <div class="campo">
+          <!------------------------------DIRECCION-------------------------------------->
+          <label>Dirección<span>*</span></label>
+          <input type="text" required>
+        </div>
+        <div class="campo">
+          <!------------------------------CRUZAMIENTOS-------------------------------------->
+          <label>Cruzamiento<span>*</span></label>
+          <input type="text" required>
+        </div>
+        <div class="campo">
+          <!------------------------------CODIGO POSTAL-------------------------------------->
+          <label>Código Postal<span>*</span></label>
+          <input type="text" placeholder="Ej. 99999" required>
+        </div>
+      </div>
+
+      <div class="fila">
+        <div class="campo">
+          <!-------------------------------CORREO------------------------------------->
+          <label>Correo Electrónico<span>*</span></label>
+          <input type="email" placeholder="Correo@Ejemplo.com" required>
+        </div>
+        <div class="campo">
+          <!--------------------------------TELEFONO------------------------------------>
+          <label>Número Telefónico<span>*</span></label>
+          <input type="tel" placeholder="Ej. 9990009999" required>
+        </div>
+      </div>
+
+      <p class="nota"><span>*</span> Campo Obligatorio</p><br>
+      <p id="respuesta"></p>
+
+      <div class="boton">
+
+        <button onclick="enviar()">Enviar</button>
+
+          <script> //Esto es el JavaScript para ejecutar la funcion enviar()
+            async function enviar() {
+              const nombre = document.getElementById("nombre").value;
+              //Lo de arriba crea la variable nombre y ahí guarda el valor que se escribio en el box 
+              //que tiene el id "nombre"
+              const apellidoPaterno = document.getElementById("apePater").value;
+              const apellidoMaterno = document.getElementById("apeMater").value; 
+
+              const response = await fetch("/saludo", {
+                //fetch es la funcion que hace la peticion aal backend (JAVA) 
+                //await hace que el codigo espere hasta que llegue la respuesta del servidor 
+                method: "POST",
+                headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                body: "nombre=" + encodeURIComponent(nombre) +
+                      "&apellidoPaterno=" + encodeURIComponent(apellidoPaterno) +
+                      "&apellidoMaterno=" + encodeURIComponent(apellidoMaterno)
+              });
+              const texto = await response.text();
+              document.getElementById("respuesta").textContent = texto;
+            }
+          </script>        
+
+
+      </div>
+    </form>
+  </main>
+</body>
+</html>
