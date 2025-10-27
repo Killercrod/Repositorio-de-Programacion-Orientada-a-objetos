@@ -15,3 +15,8 @@ Cree los archivos html y css para el UI del Formulario
 
 ## 26 de octubre
 Cree los archivos html y css para el UI de la pantalla principal
+
+-----------------------------------
+
+## 27 de octubre
+Se hicieron modificaciones a los archivos html y css de la pantalla principal
