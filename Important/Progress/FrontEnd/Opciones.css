@@ -73,9 +73,10 @@ h1 {
   margin: 4px 0;
 }
 
-.tarjeta a {
+.tarjeta p {
   color: var(--azul-subtitulo);
   text-decoration: none;
   font-size: 15px;
   margin-top: 3px;
 }
+
