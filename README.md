@@ -78,7 +78,7 @@ Arquitectura de sistemas: Diseño de sistema en tiempo real con componentes espe
 
 [Bitacoras independientes](Important/Bitácora)
 
-##Tutorial de openCV:
+## Tutorial de openCV:
 
 [Tutorial de openCV](https://docs.opencv.org/4.x/d6/d00/tutorial_py_root.html)
 
