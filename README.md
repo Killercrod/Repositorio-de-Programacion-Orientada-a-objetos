@@ -15,9 +15,7 @@ Primero les presentaremos a cada uno de los trabajadores de nuestro proyecto:
 
 3.-Braulio Tello Mancilla
 
-4.-Raul Arturo Cervera Shiels
-
-5.-Ramon Alonso Pacheco Pacheco
+4.-Ramon Alonso Pacheco Pacheco
 
 ## Nuestro sistema de trabajo y asignacion de roles:
 Todos ocuparemos los roles de desarrolladores, Q/A y UX/UI
