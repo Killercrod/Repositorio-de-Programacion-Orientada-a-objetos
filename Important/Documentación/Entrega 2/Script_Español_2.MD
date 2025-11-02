@@ -1,14 +1,14 @@
  
 # GUION 2 - SEGUNDA ENTREGA (5 minutos)
 
-## 👤 Omar - Introducción y Evolución del Producto (50 segundos)
+## 👤 Tello - Introducción y Evolución del Producto (50 segundos)
 "Buenos días a todos. En nuestra primera entrega presentamos un prototipo de consola para identificación de INEs. Para esta segunda entrega, hemos evolucionado significativamente el producto mediante 3 mejoras clave:
 
 Primero, desarrollamos una interfaz web profesional usando HTML, CSS y JavaScript. Segundo, implementamos completamente el patrón MVC, separando claramente modelo, vista y controlador. Y tercero, integramos una base de datos H2 con Hibernate para persistencia robusta de datos.
 
 Estos cambios nos permiten ofrecer una solución más escalable y user-friendly. Para explicar cómo logramos esta arquitectura, le cedo la palabra a [Braulio]."
 
-## 👤 Tello - Arquitectura y Proceso de Abstracción (60 segundos)
+## 👤  Omar - Arquitectura y Proceso de Abstracción (60 segundos)
 "Gracias Omar. Nuestra arquitectura ahora implementa claramente el patrón MVC:
 
 • El Modelo incluye nuestras entidades Hibernate como 'INE' y 'Usuario'
@@ -35,6 +35,6 @@ Actualizamos nuestro diagrama de casos de uso y priorizamos los RF usando el mé
 • SHOULD: Interfaz web responsive
 • COULD: Persistencia en base de datos
 
-*Gestionamos este proceso mediante sprints de 2 semanas, con reuniones diarias documentadas en nuestro Discord. Las métricas de contribución individual muestran distribución equitativa: 25% frontend, 35% backend, 25% base de datos, 15% documentación - todo rastreable en GitHub."*
+*Gestionamos este proceso mediante sprints de 1 semana. Las métricas de contribución individual muestran distribución equitativa:Todo esta basado en nuestras bitacoras y el porcebntaje de participacion en el proyecto general - todo rastreable en GitHub."*
 "Este proyecto fortaleció competencias genéricas como trabajo en equipo mediante herramientas como GitHub Projects, y competencias específicas de ingeniería de software mediante la implementación de MVC y Hibernate.
 
