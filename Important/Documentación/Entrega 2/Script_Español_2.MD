@@ -8,6 +8,8 @@ Primero, desarrollamos una interfaz web profesional usando HTML, CSS y JavaScrip
 
 Estos cambios nos permiten ofrecer una solución más escalable y user-friendly. Para explicar cómo logramos esta arquitectura, le cedo la palabra a [Braulio]."
 
+Explicacion de tu parte del codigo
+
 ## 👤  Omar - Arquitectura y Proceso de Abstracción (60 segundos)
 "Gracias Omar. Nuestra arquitectura ahora implementa claramente el patrón MVC:
 
@@ -19,6 +21,9 @@ El Diagrama de Clases evolucionó significativamente desde la primera entrega. A
 
 *Por ejemplo, la clase 'ValidadorCURP' implementa directamente el RF-03 de validación de CURP. [Cesar] les mostrará cómo funciona en la práctica."*
 
+Explicacion de tu parte del codigo
+
+
 ## 👤 Cesar - Demostración y Refinamiento de Requisitos (70 segundos)
 "Perfecto. Ahora vamos a ver el sistema funcionando con los nuevos requisitos refinados. En esta interfaz web pueden observar cómo hemos implementado los criterios de aceptación definidos en nuestras historias de usuario.
 
@@ -27,6 +32,8 @@ El Diagrama de Clases evolucionó significativamente desde la primera entrega. A
 Pueden ver en consola cómo se ejecuta el flujo completo: desde la vista HTML, pasando por el controlador Servlet, hasta el modelo Hibernate. 
  Evolución de Requisitos y Gestión del Proceso (60 segundos)
 "Lo que distingue nuestra evolución es cómo refinamos los requisitos basados en feedback real. 
+Explicacion de tu parte del codigo
+
 
 ## 👤 Alonso - Competencias y Conclusiones Técnicas (50 segundos)
 Actualizamos nuestro diagrama de casos de uso y priorizamos los RF usando el método MoSCoW:
@@ -37,4 +44,6 @@ Actualizamos nuestro diagrama de casos de uso y priorizamos los RF usando el mé
 
 *Gestionamos este proceso mediante sprints de 1 semana. Las métricas de contribución individual muestran distribución equitativa:Todo esta basado en nuestras bitacoras y el porcebntaje de participacion en el proyecto general - todo rastreable en GitHub."*
 "Este proyecto fortaleció competencias genéricas como trabajo en equipo mediante herramientas como GitHub Projects, y competencias específicas de ingeniería de software mediante la implementación de MVC y Hibernate.
+Explicacion de tu parte del codigo
+
 
