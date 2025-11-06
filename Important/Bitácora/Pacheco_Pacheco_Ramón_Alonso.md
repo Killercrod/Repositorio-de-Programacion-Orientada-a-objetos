@@ -20,3 +20,13 @@ Cree los archivos html y css para el UI de la pantalla principal
 
 ## 27 de octubre
 Se hicieron modificaciones a los archivos html y css de la pantalla principal
+
+-----------------------------------
+
+## 2 de noviembre
+Grabe mis videos y audios para la segunda entrega del programa
+
+-----------------------------------
+
+## 5 de noviembre
+Se crearon los archivos html y css para el UI de la captura de imagen
