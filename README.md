@@ -2,7 +2,7 @@
 
 Hola!! En este repositorio les explicaremos todo acerca del desarrollo de nuestro proyecto de programacion orientada a objetos les mostraremos desde nuestras expectativas, avances, metas y un registro paso paso acera de todo lo que estaremos trabajando 
 
-Link hacia el video de la primera entrega: https://youtu.be/EcSdlB8Lhns?si=qTkY2-_YhU6EMj21
+Link hacia el video de la primera entrega: [https://youtu.be/EcSdlB8Lhns?si=qTkY2-_YhU6EMj21](https://youtu.be/qzSQXzeVsz0)
 
 Primero les presentaremos a cada uno de los trabajadores de nuestro proyecto:
 
@@ -15,9 +15,7 @@ Primero les presentaremos a cada uno de los trabajadores de nuestro proyecto:
 
 3.-Braulio Tello Mancilla
 
-4.-Raul Arturo Cervera Shiels
-
-5.-Ramon Alonso Pacheco Pacheco
+4.-Ramon Alonso Pacheco Pacheco
 
 ## Nuestro sistema de trabajo y asignacion de roles:
 Todos ocuparemos los roles de desarrolladores, Q/A y UX/UI
