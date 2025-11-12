@@ -9,8 +9,8 @@
 	<packaging>jar</packaging>
 
 	<properties>
-		<maven.compiler.source>11</maven.compiler.source>
-		<maven.compiler.target>11</maven.compiler.target>
+		<maven.compiler.source>21</maven.compiler.source>
+		<maven.compiler.target>21</maven.compiler.target>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 
@@ -21,9 +21,9 @@
 			Versión 5.6.x es estable y compatible con JPA en Java 11.
 		-->
 		<dependency>
-			<groupId>org.hibernate</groupId>
+			<groupId>org.hibernate.orm</groupId>
 			<artifactId>hibernate-core</artifactId>
-			<version>5.6.15.Final</version>
+			<version>6.4.4.Final</version>
 		</dependency>
 
 		<!--
@@ -57,7 +57,7 @@
 		<dependency>
 			<groupId>jakarta.persistence</groupId>
 			<artifactId>jakarta.persistence-api</artifactId>
-			<version>2.2.3</version>
+			<version>3.1.0</version>
 		</dependency>
 	</dependencies>
 
