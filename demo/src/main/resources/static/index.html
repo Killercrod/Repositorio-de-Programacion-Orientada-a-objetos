@@ -3,116 +3,30 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Formulario de Registro</title>
-  <link rel="stylesheet" href="style.css">
+  <title>Seleccione una opción</title>
+  <link rel="stylesheet" href="index.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
-  <header><head_title>Formulario</head_title></header>
+  <header></header>
+  
   <main>
-    <form class="formulario">
-      <div class="fila">
-        <div class="campo">
-          <!----------------------------NOMBRE---------------------------------------->
-          <label>Nombre(s)<span>*</span></label>
-          <input id="nombre" type="text" required>
-        </div>
-        <div class="campo">
-          <!----------------------------APELLIDO PATERNO---------------------------------------->
-          <label>Apellido Paterno<span>*</span></label>
-          <input id="apePater" type="text" required>
-        </div>
-        <div class="campo">
-          <!-----------------------------APELLIDO MATERNO--------------------------------------->
-          <label>Apellido Materno</label>
-          <input id="apeMater" type="text">
-        </div>
+    <h1>Seleccione una opción:</h1>
+    
+    <div class="opciones">
+
+      <div class="tarjeta" onclick="window.location.href='form.html'">
+        <i class="fa-solid fa-clipboard-list"></i>
+        <h2>Editar sus datos</h2>
+        <p>Llenar un formulario</p>
       </div>
 
-      <div class="fila">
-        <div class="campo">
-          <!------------------------------CURP-------------------------------------->
-          <label>CURP<span>*</span></label>
-          <input id="curp" type="text" required>
-        </div>
+      <div class="tarjeta" onclick="window.location.href='captura.html'">
+        <i class="fa-solid fa-camera"></i>
+        <h2>Tomar una foto de su INE</h2>
+        <p>Editar sus datos al finalizar</p>
       </div>
-
-      <div class="fila">
-        <div class="campo">
-          <!------------------------------DIRECCION-------------------------------------->
-          <label>Dirección<span>*</span></label>
-          <input id="direccion" type="text" required>
-        </div>
-        <div class="campo">
-          <!------------------------------CRUZAMIENTOS-------------------------------------->
-          <label>Cruzamiento<span>*</span></label>
-          <input id="cruzamientos" type="text" required>
-        </div>
-        <div class="campo">
-          <!------------------------------CODIGO POSTAL-------------------------------------->
-          <label>Código Postal<span>*</span></label>
-          <input id="cp" type="text" placeholder="Ej. 99999" required>
-        </div>
-      </div>
-
-      <div class="fila">
-        <div class="campo">
-          <!-------------------------------CORREO------------------------------------->
-          <label>Correo Electrónico<span>*</span></label>
-          <input id="correo" type="email" placeholder="Correo@Ejemplo.com" required>
-        </div>
-        <div class="campo">
-          <!--------------------------------TELEFONO------------------------------------>
-          <label>Número Telefónico<span>*</span></label>
-          <input id="telefono" type="tel" placeholder="Ej. 9990009999" required>
-        </div>
-      </div>
-
-      <p class="nota"><span>*</span> Campo Obligatorio</p><br>
-
-      <div class="boton">
-
-        <button onclick="enviar()">Enviar</button>
-
-          <script> //Esto es el JavaScript para ejecutar la funcion enviar()
-            async function enviar() {
-              //Se usa el try para capturar el bloque de codigo que 
-              //podria contener errores, en este caso lo que se le envia al servidor
-              const nombre = document.getElementById("nombre").value;
-              //Lo de arriba crea la variable nombre y ahí guarda el valor que se escribio en el box 
-              //que tiene el id "nombre"
-              const apellidoPaterno = document.getElementById("apePater").value;
-              const apellidoMaterno = document.getElementById("apeMater").value; 
-              const curp = document.getElementById("curp").value;
-              const direccion = document.getElementById("direccion").value;
-              const cruzamientos = document.getElementById("cruzamientos").value; 
-              const codigopostal = document.getElementById("cp").value;
-              const correo = document.getElementById("correo").value;
-              const telefono = document.getElementById("telefono").value;
-
-              const response = await fetch("/saludo", {
-                //fetch es la funcion que hace la peticion aal backend (JAVA) 
-                //await hace que el codigo espere hasta que llegue la respuesta del servidor 
-                method: "POST",
-                headers: { "Content-Type": "application/x-www-form-urlencoded" },
-
-                body: "nombre=" + encodeURIComponent(nombre) +
-                      "&apellidoPaterno=" + encodeURIComponent(apellidoPaterno) +
-                      "&apellidoMaterno=" + encodeURIComponent(apellidoMaterno) +
-                      "&curp=" + encodeURIComponent(curp) + 
-                      "&direccion=" + encodeURIComponent(direccion) +
-                      "&cruzamientos=" + encodeURIComponent (cruzamientos) + 
-                      "&codigopostal=" + encodeURIComponent(codigopostal) +
-                      "&correo=" + encodeURIComponent(correo) +
-                      "&telefono=" + encodeURIComponent(telefono)});//Manda todo lo de arriba al JAVA mediante el metodo enviar()
-              const texto = await response.text();
-              document.getElementById("respuesta").textContent = texto;
-              //Recibe el texto de usuario registrado correctamente
-              alert("Usuario registrado con éxito");
-              //if (texto === "CORRECTO"){}
-              }
-          </script>        
-      </div>
-    </form>
+    </div>
   </main>
 </body>
 </html>
