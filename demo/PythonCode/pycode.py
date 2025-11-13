@@ -252,7 +252,7 @@ if args.img_source:
     with open(ruta_json, 'w', encoding='utf-8') as f:
         json.dump(texto(imagen), f, indent=2, ensure_ascii=False)
     
-    print(f"✅ Datos CURP guardados en: {ruta_json}")
+    print(f"Datos CURP guardados en: {ruta_json}")
   
     # Esperar a que el usuario presione una tecla para cerrar las ventanas
     print("Presiona cualquier tecla en una de las ventanas de imagen para cerrar...")
@@ -307,7 +307,16 @@ while True:
         # Solo captura lo que está dentro del cuadro
         roi = frame[top_left[1]:bottom_right[1], top_left[0]:bottom_right[0]]
         texto(roi)
-        
+         # Procesar y obtener datos JSON
+        camara_json = texto(roi)
+     # Si se identificó un documento, guardamos el JSON
+        if camara_json.get("documento_identificado"):
+    # Usamos el contador_global para el nombre del archivo
+            nombre_archivo = f"pasos_procesamiento/captura_{contador_global}.json"
+            with open(nombre_archivo, 'w', encoding='utf-8') as f:
+                json.dump(camara_json, f, indent=2, ensure_ascii=False)
+    print(f"Datos guardados en: {nombre_archivo}")  
+    
 cap.release()
 cv2.destroyAllWindows()
 #Para que no ejecute el el codigo de camara en loop y solo se ejecute cuando pycode este en tipo script, no al importarlo
