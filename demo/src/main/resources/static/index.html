@@ -6,6 +6,25 @@
   <title>Seleccione una opción</title>
   <link rel="stylesheet" href="index.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <script>
+  function tomarFoto() {
+    fetch('/pycode')
+      .then(async response => {
+        const text = await response.text();
+        try {
+          const data = JSON.parse(text);
+          // Mostrar en UI en lugar de alert si quieres
+          alert("Respuesta: " + JSON.stringify(data, null, 2));
+        } catch (e) {
+          // respuesta no JSON
+          alert("Respuesta no-JSON del servidor: " + text);
+        }
+      })
+      .catch(err => {
+        alert("Error al llamar al endpoint: " + err);
+      });
+  }
+  </script>
 </head>
 <body>
   <header></header>
@@ -21,7 +40,7 @@
         <p>Llenar un formulario</p>
       </div>
 
-      <div class="tarjeta" onclick="window.location.href='/pycode'">
+      <div class="tarjeta" onclick="tomarFoto()">
         <i class="fa-solid fa-camera"></i>
         <h2>Tomar una foto de su INE</h2>
         <p>Editar sus datos al finalizar</p>

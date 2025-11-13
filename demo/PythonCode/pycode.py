@@ -6,13 +6,11 @@ import numpy as np
 import argparse
 import json
 
-#os.environ['TESSDATA_PREFIX'] = '/opt/homebrew/share/tessdata' #Funciona para la lap de Cesar
-os.environ['TESSDATA_PREFIX'] = r'C:\Program Files\Tesseract-OCR\tessdata' #Funciona para mi lap (Tello)
-#Configuracion del parser
+os.environ['TESSDATA_PREFIX'] = r'C:\Program Files\Tesseract-OCR\tessdata'
+
 parser = argparse.ArgumentParser(
     description="Sistema de reconocimiento de INE con opción de fuente de imagen."
 )
-# Argumento opcional para fuente de imagen
 parser.add_argument(
     "--img-source",
     type=str,
@@ -20,11 +18,12 @@ parser.add_argument(
 )
 
 args = parser.parse_args()
-# Variables
+
+# Variables globales
 cuadro = 100
 doc = 0
+contador_global = 0
 
-# Crear carpeta para guardar los pasos si no existe
 if not os.path.exists("pasos_procesamiento"):
     os.makedirs("pasos_procesamiento")
 
@@ -230,96 +229,137 @@ def texto(imagen):
     return datos_json
 #Para que no ejecute el el codigo de camara en loop y solo se ejecute cuando pycode este en tipo script, no al importarlo
 def tomar_foto_y_guardar():
-    # función que contiene el flujo de captura/procesamiento y crea el JSON
-    pass
+    """Abre la cámara y espera a que el usuario presione 'S' para capturar.
+    Devuelve el JSON procesado o None si se cancela/error."""
+    global contador_global
+    import json
 
-# Modo imagen estática vs modo cámara
-if args.img_source:
-    print(f"Procesando imagen: {args.img_source}")
-    
-    # Cargar imagen desde archivo
-    imagen = cv2.imread(args.img_source)
-    if imagen is None:
-        print(f"Error: No se pudo cargar la imagen {args.img_source}")
-        exit()
-    
-    # Procesar la imagen
-    texto(imagen)
-      # Guardar JSON en archivo
-    nombre_archivo = os.path.splitext(os.path.basename(args.img_source))[0]
-    ruta_json = f"pasos_procesamiento/{nombre_archivo}_curp.json"
-    
-    with open(ruta_json, 'w', encoding='utf-8') as f:
-        json.dump(texto(imagen), f, indent=2, ensure_ascii=False)
-    
-    print(f"Datos CURP guardados en: {ruta_json}")
-  
-    # Esperar a que el usuario presione una tecla para cerrar las ventanas
-    print("Presiona cualquier tecla en una de las ventanas de imagen para cerrar...")
-    cv2.waitKey(0)
-    cv2.destroyAllWindows()
-    exit()  # Salir después de procesar la imagen
-
-else:
-    # Modo cámara
     cap = cv2.VideoCapture(0)
+    if not cap.isOpened():
+        print("Error: no se pudo abrir la cámara")
+        return None
+
     cap.set(3, 1280)
     cap.set(4, 740)
 
-# Empezar 
-while True:
-    # Lectura de Videocaptura
-    ret, frame = cap.read()
-    
-    # Interfaz
-    cv2.putText(frame,'Ubique el documento a identificar',(450,80 - cuadro),cv2.FONT_HERSHEY_SCRIPT_SIMPLEX, 0.71,(0,255,0),2)
-    
-    if not ret or frame is None:
-        print("Error: No se pudo capturar el frame. ¿Cámara conectada?")
-        break
-    # Coordenadas para centrar el cuadro
-    center_x = frame.shape[1] // 2
-    center_y = frame.shape[0] // 2
-    width = 600
-    height = 400
+    try:
+        while True:
+            ret, frame = cap.read()
+            if not ret or frame is None:
+                print("Error: no se pudo leer frame de la cámara")
+                break
 
-    top_left = (center_x - width // 2, center_y - height // 2)
-    bottom_right = (center_x + width // 2, center_y + height // 2)
+            # Rectángulo centrado donde colocar el documento
+            center_x = frame.shape[1] // 2
+            center_y = frame.shape[0] // 2
+            width = 600
+            height = 400
+            top_left = (center_x - width // 2, center_y - height // 2)
+            bottom_right = (center_x + width // 2, center_y + height // 2)
 
-    cv2.rectangle(frame, top_left, bottom_right, (0,255,0), 2)
-    
-    # Opciones
-    if doc == 0:
-        cv2.putText(frame,'Presiona S para identificar',(470,750 - cuadro),cv2.FONT_HERSHEY_SCRIPT_SIMPLEX, 0.71,(0,255,0),2)
-    elif doc ==  1:
-        cv2.putText(frame ,'INE', (470, 750 - cuadro),cv2.FONT_HERSHEY_SIMPLEX, 0.71,(0,255,255),2) 
-        print('Ine:')
-        
-    # Leemos nuestro teclado
-    t = cv2.waitKey(5)
-    
-    cv2.imshow('ID INTELIGENTE',frame)
-    
-    # Escape
-    if t == 27:
-        break
-    elif t == 83 or t == 115:
-        # Solo captura lo que está dentro del cuadro
-        roi = frame[top_left[1]:bottom_right[1], top_left[0]:bottom_right[0]]
-        texto(roi)
-         # Procesar y obtener datos JSON
-        camara_json = texto(roi)
-     # Si se identificó un documento, guardamos el JSON
-        if camara_json.get("documento_identificado"):
-    # Usamos el contador_global para el nombre del archivo
-            nombre_archivo = f"pasos_procesamiento/captura_{contador_global}.json"
-            with open(nombre_archivo, 'w', encoding='utf-8') as f:
-                json.dump(camara_json, f, indent=2, ensure_ascii=False)
-    print(f"Datos guardados en: {nombre_archivo}")  
-    
-cap.release()
-cv2.destroyAllWindows()
-#Para que no ejecute el el codigo de camara en loop y solo se ejecute cuando pycode este en tipo script, no al importarlo
+            cv2.rectangle(frame, top_left, bottom_right, (0, 255, 0), 2)
+            cv2.putText(frame, "Presiona 'S' para capturar, ESC para cancelar",
+                        (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (255, 255, 255), 2)
+
+            cv2.imshow('ID INTELIGENTE - Presiona S para capturar', frame)
+            key = cv2.waitKey(1) & 0xFF
+
+            if key == 27:  # ESC
+                print("Captura cancelada por usuario")
+                break
+
+            if key == ord('s') or key == ord('S'):
+                roi = frame[top_left[1]:bottom_right[1], top_left[0]:bottom_right[0]]
+                datos_json = texto(roi)
+
+                if not os.path.exists("pasos_procesamiento"):
+                    os.makedirs("pasos_procesamiento")
+
+                nombre_archivo = f"pasos_procesamiento/captura_{contador_global}.json"
+                with open(nombre_archivo, 'w', encoding='utf-8') as f:
+                    json.dump(datos_json, f, indent=2, ensure_ascii=False)
+
+                print(f"Datos guardados en: {nombre_archivo}")
+                contador_global += 1
+
+                cap.release()
+                cv2.destroyAllWindows()
+                return datos_json
+
+    finally:
+        if cap.isOpened():
+            cap.release()
+        cv2.destroyAllWindows()
+
+    return None
+
+# PROTEGER TODO EL CÓDIGO DE EJECUCIÓN AQUÍ
 if __name__ == "__main__":
-    # solo al ejecutar `python pycode.py` se hace la captura directa
-    tomar_foto_y_guardar()
+    if args.img_source:
+        print(f"Procesando imagen: {args.img_source}")
+        
+        imagen = cv2.imread(args.img_source)
+        if imagen is None:
+            print(f"Error: No se pudo cargar la imagen {args.img_source}")
+            exit()
+        
+        datos_json = texto(imagen)
+        nombre_archivo = os.path.splitext(os.path.basename(args.img_source))[0]
+        ruta_json = f"pasos_procesamiento/{nombre_archivo}_curp.json"
+        
+        with open(ruta_json, 'w', encoding='utf-8') as f:
+            json.dump(datos_json, f, indent=2, ensure_ascii=False)
+        
+        print(f"Datos CURP guardados en: {ruta_json}")
+        print("Presiona cualquier tecla en una de las ventanas de imagen para cerrar...")
+        cv2.waitKey(0)
+        cv2.destroyAllWindows()
+        exit()
+
+    else:
+        # Modo cámara
+        cap = cv2.VideoCapture(0)
+        cap.set(3, 1280)
+        cap.set(4, 740)
+
+        while True:
+            ret, frame = cap.read()
+            
+            cv2.putText(frame,'Ubique el documento a identificar',(450,80 - cuadro),cv2.FONT_HERSHEY_SCRIPT_SIMPLEX, 0.71,(0,255,0),2)
+            
+            if not ret or frame is None:
+                print("Error: No se pudo capturar el frame. ¿Cámara conectada?")
+                break
+
+            center_x = frame.shape[1] // 2
+            center_y = frame.shape[0] // 2
+            width = 600
+            height = 400
+
+            top_left = (center_x - width // 2, center_y - height // 2)
+            bottom_right = (center_x + width // 2, center_y + height // 2)
+
+            cv2.rectangle(frame, top_left, bottom_right, (0,255,0), 2)
+            
+            if doc == 0:
+                cv2.putText(frame,'Presiona S para identificar',(470,750 - cuadro),cv2.FONT_HERSHEY_SCRIPT_SIMPLEX, 0.71,(0,255,0),2)
+            elif doc == 1:
+                cv2.putText(frame ,'INE', (470, 750 - cuadro),cv2.FONT_HERSHEY_SIMPLEX, 0.71,(0,255,255),2)
+                
+            t = cv2.waitKey(5)
+            cv2.imshow('ID INTELIGENTE',frame)
+            
+            if t == 27:
+                break
+            elif t == 83 or t == 115:
+                roi = frame[top_left[1]:bottom_right[1], top_left[0]:bottom_right[0]]
+                camara_json = texto(roi)
+                
+                if camara_json.get("documento_identificado"):
+                    nombre_archivo = f"pasos_procesamiento/captura_{contador_global}.json"
+                    with open(nombre_archivo, 'w', encoding='utf-8') as f:
+                        json.dump(camara_json, f, indent=2, ensure_ascii=False)
+                    print(f"Datos guardados en: {nombre_archivo}")
+
+        cap.release()
+        cv2.destroyAllWindows()
