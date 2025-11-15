@@ -3,7 +3,7 @@ package com.example.demo;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-public class SaludoController {
+public class BDconection {
 
     @PostMapping("/saludo")
     //Llamada Request a los parametros necesarios (los datos del usuario)

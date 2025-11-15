@@ -28,7 +28,11 @@
       <div class="fila">
         <div class="campo">
           <label>CURP<span>*</span></label>
-          <input type="text" required>
+          <input type="text" minlength="18" maxlength="18" required>
+        </div>
+        <div class="campo">
+          <label>Fecha de Nacimiento<span>*</span></label>
+          <input type="date" max="" required>
         </div>
       </div>
 
@@ -43,18 +47,18 @@
         </div>
         <div class="campo">
           <label>Código Postal<span>*</span></label>
-          <input type="text" placeholder="Ej. 99999" required>
+          <input type="number" placeholder="Ej. 99999" min="01000" max="99999" required>
         </div>
       </div>
 
       <div class="fila">
         <div class="campo">
           <label>Correo Electrónico<span>*</span></label>
-          <input type="email" placeholder="Correo@Ejemplo.com" required>
+          <input type="email" placeholder="Correo@Ejemplo.com" pattern="^[^@\s]+@[^@\s]+\.[^@\s]+$" required>
         </div>
         <div class="campo">
           <label>Número Telefónico<span>*</span></label>
-          <input type="tel" placeholder="Ej. 9990009999" required>
+          <input type="tel" placeholder="Ej. 9990009999" pattern="[0-9]{10}" required>
         </div>
       </div>
 
@@ -65,5 +69,19 @@
       </div>
     </form>
   </main>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const fechaInput = document.querySelector('input[type="date"]');
+      const hoy = new Date();
+
+      const anio = hoy.getFullYear() - 18;
+      const mes = (hoy.getMonth() + 1).toString().padStart(2, '0');
+      const dia = hoy.getDate().toString().padStart(2, '0');
+
+      fechaInput.max = `${anio}-${mes}-${dia}`;
+    });
+  </script>
+
 </body>
 </html>

@@ -1,0 +1,19 @@
+[1mdiff --cc demo/pom.xml[m
+[1mindex f8a0f0b,b3c6b81..0000000[m
+[1m--- a/demo/pom.xml[m
+[1m+++ b/demo/pom.xml[m
+[36m@@@ -27,10 -27,7 +27,14 @@@[m
+  		<url/>[m
+  	</scm>[m
+  	<properties>[m
+[32m++<<<<<<< HEAD[m
+[32m +		<java.version>17</java.version>[m
+[32m +		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>[m
+[32m +		<maven.compiler.source>21</maven.compiler.source>[m
+[32m +		<maven.compiler.target>21</maven.compiler.target>[m
+[32m++=======[m
+[32m+ 		<java.version>21</java.version>[m
+[32m++>>>>>>> 41799958f6c2c848be939a289327dd2245beac28[m
+  	</properties>[m
+  	<dependencies>[m
+  [m
