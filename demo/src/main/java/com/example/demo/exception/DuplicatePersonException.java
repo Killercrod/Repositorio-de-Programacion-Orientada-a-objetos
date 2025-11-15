@@ -1,4 +1,4 @@
-package mx.ine.ocr.db.exception;
+package com.example.demo.exception;
 
 /**
  * Excepción lanzada cuando se detecta un intento de insertar una persona

@@ -1,4 +1,4 @@
-package mx.ine.ocr.db.util;
+package com.example.demo.util;
 
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;

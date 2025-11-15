@@ -1,16 +1,17 @@
-package mx.ine.ocr.db.dao;
-
-import mx.ine.ocr.db.exception.DuplicatePersonException;
-import mx.ine.ocr.db.model.Person;
-import mx.ine.ocr.db.util.HibernateUtil;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
-import org.hibernate.query.Query;
+package com.example.demo.dao;
 
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Locale;
+
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+import org.hibernate.query.Query;
+
+import com.example.demo.exception.DuplicatePersonException;
+import com.example.demo.model.Person;
+import com.example.demo.util.HibernateUtil;
 
 /**
  * DAO (Data Access Object) responsable de las operaciones CRUD relacionadas
