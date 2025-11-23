@@ -39,11 +39,13 @@ public class CapturaController {
                 try {
                     // Parsear JSON y guardar en BD
                     ObjectMapper mapper = new ObjectMapper();
+                    @SuppressWarnings("unchecked")  
                     Map<String, Object> jsonResponse = mapper.readValue(body, Map.class);
                     
                     // Extraer datos de la respuesta
                     Object resultadoObj = jsonResponse.get("resultado");
                     if (resultadoObj instanceof Map) {
+                        @SuppressWarnings("unchecked")
                         Map<String, Object> resultado = (Map<String, Object>) resultadoObj;
                         
                         // Crear entidad OCRData con los datos

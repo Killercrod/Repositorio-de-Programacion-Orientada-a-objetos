@@ -87,7 +87,7 @@ public class PersonDAO {
 
             // Si no existe, guardamos dentro de una transacción
             Transaction tx = session.beginTransaction();
-            session.save(p);
+            session.persist(p);  // <-- Cambiar de save() a persist()
             tx.commit();
         }
     }
