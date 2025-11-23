@@ -3,7 +3,7 @@
 -- Compatible con MySQL 8.0+
 -- ============================================================
 
--- Crear base de datos si no existe
+-- Crear base de datos
 CREATE DATABASE IF NOT EXISTS ine_db CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 USE ine_db;
 
