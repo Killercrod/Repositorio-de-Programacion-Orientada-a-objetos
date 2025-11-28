@@ -40,7 +40,7 @@ head_title {
     font-size: 45px;
     color: white;
     font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-    margin-left: 50px;
+    margin-left: 20px;
 }
 
 label {
@@ -94,4 +94,25 @@ button {
 
 button:hover {
   background-color: #2aa52a;
+}
+
+.boton-regresar {
+  position: absolute;
+  top: 1%;
+  left: 15px;
+  background-color: #9c2b52;
+  color: white;
+  padding: 10px 16px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: bold;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+  transition: 0.2s ease;
+  z-index: 1000;
+}
+
+.boton-regresar:hover {
+  background-color: #5a002d;
+  transform: scale(1.03);
 }
