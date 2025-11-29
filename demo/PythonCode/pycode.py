@@ -6,7 +6,8 @@ import numpy as np
 import argparse
 import json
 
-os.environ['TESSDATA_PREFIX'] = '/opt/homebrew/share/tessdata'
+#os.environ['TESSDATA_PREFIX'] = '/opt/homebrew/share/tessdata' #lap con mac
+os.environ['TESSDATA_PREFIX'] = r'C:\Program Files\Tesseract-OCR\tessdata' #lap con windows
 # Configuración del parser
 parser = argparse.ArgumentParser(
     description="Sistema de reconocimiento de INE con opción de fuente de imagen."
@@ -152,7 +153,8 @@ def procesar_rois(roi_nombre, roi_curp):
     global doc, contador_global
     doc = 0
     # Dirección Pytesseract
-    pytesseract.pytesseract.tesseract_cmd = '/opt/homebrew/bin/tesseract'
+    pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe' #laptop windows
+    #pytesseract.pytesseract.tesseract_cmd = '/opt/homebrew/bin/tesseract' #laptop con mac
 
     # Incrementar contador para nuevo procesamiento
     contador_global += 1
@@ -196,6 +198,13 @@ def procesar_rois(roi_nombre, roi_curp):
     print("="*50)
     
     return datos_json
+
+#Para que no ejecute el el codigo de camara en loop y solo se ejecute cuando pycode este en tipo script, no al importarlo
+def tomar_foto_y_guardar():
+    """Abre la cámara y espera a que el usuario presione 'S' para capturar.
+    Devuelve el JSON procesado o None si se cancela/error."""
+    global contador_global
+    import json
 
 # Modo imagen estática vs modo cámara
 if args.img_source:
