@@ -1,5 +1,5 @@
 
-Usuarios principales:
+# Usuarios principales:
 
 Ciudadanos mexicanos con INE (Instituto Nacional Electoral)
 Residentes en México con credencial para votar
