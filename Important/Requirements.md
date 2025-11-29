@@ -10,7 +10,7 @@ RF-002: Procesamiento de imagen para OCR
 Como sistema, quiero aplicar filtros de escala de grises, desenfoque y umbralización adaptativa para optimizar el reconocimiento de texto
 RF-003: Reconocimiento de patrones de INE
 
-Como sistema, quiero identificar campos específicos (NOMBRE, DOMICILIO, CURP, FECHA DE NACIMIENTO) para validar autenticidad del documento
+Como sistema, quiero identificar campos específicos (NOMBRE Y CURP) para validar autenticidad del documento
 RF-004: Interfaz de usuario visual
 
 Como usuario, quiero ver indicadores gráficos de estado y resultados para entender el proceso de verificación
