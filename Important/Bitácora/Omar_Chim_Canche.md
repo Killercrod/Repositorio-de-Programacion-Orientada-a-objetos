@@ -11,3 +11,7 @@ El 2 de noviembre participe en la realizacion del video de la etapa 2 del proyec
 El 11 de noviembre en conjunto con mis compañeros realizamos la union de cada parte del proyecto
 
 El 15 de noviembre realice la migracion de la base de datos de H2 a SQL usando hibernate
+
+El 21 de noviembre junto con mi compañero tello configuramos la base de datos en docker para su correcto funcionamiento
+
+el 29 de noviembre realice la propuesta de valor y el diagrama de clases UML
