@@ -28,7 +28,6 @@ doc = 0
 if not os.path.exists("pasos_procesamiento"):
     os.makedirs("pasos_procesamiento")
 
-
 def mejorar_contraste(imagen):
     """Mejora el contraste usando CLAHE"""
     lab = cv2.cvtColor(imagen, cv2.COLOR_BGR2LAB)
@@ -199,15 +198,66 @@ def procesar_rois(roi_nombre, roi_curp):
     
     return datos_json
 
-#Para que no ejecute el el codigo de camara en loop y solo se ejecute cuando pycode este en tipo script, no al importarlo
+ # Modo cámara
 def tomar_foto_y_guardar():
     """Abre la cámara y espera a que el usuario presione 'S' para capturar.
     Devuelve el JSON procesado o None si se cancela/error."""
     global contador_global
     import json
 
+    cap = cv2.VideoCapture(0)
+    cap.set(3, 1280)
+    cap.set(4, 740)
+
+    roi_nombre_pos = (530, 280)
+    roi_nombre_tam = (160, 85)
+    roi_curp_pos = (500, 480)
+    roi_curp_tam = (250, 30)
+
+    while True:
+        ret, frame = cap.read()
+        margenx = 305
+        margeny = 150
+
+        cv2.putText(frame,'Ubique el documento a identificar',(450,80 - cuadro),cv2.FONT_HERSHEY_SCRIPT_SIMPLEX, 0.71,(0,255,0),2)
+        cv2.rectangle(frame,(margenx,margeny),(1280 - margenx, 720 - margeny), (0,255,0), 2)
+
+        if not ret or frame is None:
+            print("Error: No se pudo capturar el frame. ¿Cámara conectada?")
+            break
+
+        nombre_tl = roi_nombre_pos
+        nombre_br = (roi_nombre_pos[0] + roi_nombre_tam[0], roi_nombre_pos[1] + roi_nombre_tam[1])
+        curp_tl = roi_curp_pos
+        curp_br = (roi_curp_pos[0] + roi_curp_tam[0], roi_curp_pos[1] + roi_curp_tam[1])
+
+        cv2.rectangle(frame, nombre_tl, nombre_br, (0, 255, 0), 2)
+        cv2.rectangle(frame, curp_tl, curp_br, (255, 0, 0), 2)
+        cv2.putText(frame, 'NOMBRE', (nombre_tl[0], nombre_tl[1] - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 255, 0), 2)
+        cv2.putText(frame, 'CURP', (curp_tl[0], curp_tl[1] - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 0, 0), 2)
+        cv2.putText(frame,'Presiona S para identificar',(470,750 - cuadro),cv2.FONT_HERSHEY_SCRIPT_SIMPLEX, 0.71,(0,255,0),2)
+
+        t = cv2.waitKey(5)
+        cv2.imshow('ID INTELIGENTE',frame)
+
+        if t == 27:  # ESC
+            break
+        elif t == 83 or t == 115:  # S
+            roi_nombre = frame[nombre_tl[1]:nombre_br[1], nombre_tl[0]:nombre_br[0]]
+            roi_curp = frame[curp_tl[1]:curp_br[1], curp_tl[0]:curp_br[0]]
+            camara_json = procesar_rois(roi_nombre, roi_curp)
+            cap.release()
+            cv2.destroyAllWindows()
+            return camara_json
+
+    cap.release()
+    cv2.destroyAllWindows()
+    return None
+
+#PROTEGE TODO EL CODIGO 
+if __name__ == "__main__":
 # Modo imagen estática vs modo cámara
-if args.img_source:
+ if args.img_source:
     print(f"Procesando imagen: {args.img_source}")
     
     # Cargar imagen desde archivo
@@ -239,91 +289,4 @@ if args.img_source:
     exit()  # Salir después de procesar la imagen
 
 else:
-    # Modo cámara
-    cap = cv2.VideoCapture(0)
-    cap.set(3, 1280)
-    cap.set(4, 740)
-    
-    # Posiciones fijas para los ROIs (no centradas)
-    roi_nombre_pos = (530, 280)  # (x, y) 
-    roi_nombre_tam = (160, 85)  # (ancho, alto)
-
-    roi_curp_pos = (500, 480)    # (x, y)  
-    roi_curp_tam = (250, 30)    # (ancho, alto)
-    
-    # Empezar 
-    while True:
-        # Lectura de Videocaptura
-        ret, frame = cap.read()
-        margenx = 305
-        margeny = 150
-        
-        # Interfaz
-        cv2.putText(frame,'Ubique el documento a identificar',(450,80 - cuadro),cv2.FONT_HERSHEY_SCRIPT_SIMPLEX, 0.71,(0,255,0),2)
-        cv2.rectangle(frame,(margenx,margeny),(1280 - margenx, 720 - margeny), (0,255,0), 2)
-        
-        if not ret or frame is None:
-            print("Error: No se pudo capturar el frame. ¿Cámara conectada?")
-            break
-        
-        # Coordenadas del ROI NOMBRE (Verde) - Posición fija
-        nombre_tl = roi_nombre_pos
-        nombre_br = (roi_nombre_pos[0] + roi_nombre_tam[0], 
-                     roi_nombre_pos[1] + roi_nombre_tam[1])
-        
-        # Coordenadas del ROI CURP (Azul) - Posición fija
-        curp_tl = roi_curp_pos
-        curp_br = (roi_curp_pos[0] + roi_curp_tam[0], 
-                   roi_curp_pos[1] + roi_curp_tam[1])
-
-        # Dibujar ambos ROIs en posiciones fijas
-        cv2.rectangle(frame, nombre_tl, nombre_br, (0, 255, 0), 2)    # Verde - Nombre
-        cv2.rectangle(frame, curp_tl, curp_br, (255, 0, 0), 2)        # Azul - CURP
-        
-        # Etiquetas para los ROIs
-        cv2.putText(frame, 'NOMBRE', (nombre_tl[0], nombre_tl[1] - 10), 
-                    cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 255, 0), 2)
-        cv2.putText(frame, 'CURP', (curp_tl[0], curp_tl[1] - 10), 
-                    cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 0, 0), 2)
-        
-        # Opciones
-        if doc == 0:
-            cv2.putText(frame,'Presiona S para identificar',(470,750 - cuadro),cv2.FONT_HERSHEY_SCRIPT_SIMPLEX, 0.71,(0,255,0),2)
-        elif doc == 1:
-            cv2.putText(frame ,'INE', (470, 750 - cuadro),cv2.FONT_HERSHEY_SIMPLEX, 0.71,(0,255,255),2) 
-            
-        # Leemos nuestro teclado
-        t = cv2.waitKey(5)
-        
-        cv2.imshow('ID INTELIGENTE',frame)
-        
-        # Escape
-        if t == 27:
-            break
-        elif t == 83 or t == 115:
-            # Capturar AMBOS ROIs con una sola tecla
-            roi_nombre = frame[nombre_tl[1]:nombre_br[1], nombre_tl[0]:nombre_br[0]]
-            roi_curp = frame[curp_tl[1]:curp_br[1], curp_tl[0]:curp_br[0]]
-            
-            # Procesar AMBOS ROIs - CORREGIDO: usar procesar_rois en lugar de texto
-            camara_json = procesar_rois(roi_nombre, roi_curp)
-            
-            # Si se identificó un documento, guardamos el JSON
-            if camara_json.get("documento_identificado"):
-                nombre_archivo = f"pasos_procesamiento/captura_{contador_global}.json"
-                
-                with open(nombre_archivo, 'w', encoding='utf-8') as f:
-                    json.dump(camara_json, f, indent=2, ensure_ascii=False)
-                
-                print(f"Datos guardados en: {nombre_archivo}")
-                
-                # Mostrar confirmación en pantalla por 1 segundo
-                cv2.putText(frame, '✓ JSON GUARDADO', (50, 50), 
-                           cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 255, 0), 2)
-                cv2.imshow('ID INTELIGENTE', frame)
-                cv2.waitKey(1000)
-            else:
-                print("No se detectó documento válido - No se guardó JSON")
-                
-    cap.release()
-    cv2.destroyAllWindows()
+   tomar_foto_y_guardar()
