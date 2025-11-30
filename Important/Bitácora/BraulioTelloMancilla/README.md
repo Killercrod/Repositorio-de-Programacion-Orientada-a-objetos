@@ -19,7 +19,7 @@ The meetings will be every thursday one and a half hours, is most for see what w
   </details>
 
 
-<details open> <summary><h2>Second month</h2></summary>
+<details> <summary><h2>Second month</h2></summary>
   
   ## Individual Work 👤
   --- 
@@ -29,4 +29,27 @@ The meetings will be every thursday one and a half hours, is most for see what w
   
   [Version 0 document](./version_0) This code is what i've been working on the last days, it conects the html with a java code, using **Spring Boot framework** .
   For make the JAVA code a Web Controller, i use some of the Spring tools like @RestController (For identify the java as the web controller), @RequestParameters (For call     the parameters) and using some others like fetch API that allows to send and request data from the server (JAVA code), in less words it comunicate the frontend with the     backend.
+</details>
+
+
+<details open> <summary><h2>Third month</h2></summary>
+  
+  ## Individual Work 👤
+  --- 
+  ###  
+ In the last month of the project, I focused on having all the code together, both Python and Java, as well as the front end. Practically, my role was that of a back-end developer since I was in charge of making sure the Java servers that processed the JSON, both from the form and the Python script for taking the photo, worked correctly. I had many problems when trying to put everything together because with each update of the codes, both the UI and the database, and the Python code, the Java code also failed a lot since my colleagues would remove essential parts of my work or change them in a way that I had to review everything again and connect it properly. To make things easier, I created a Java script and a Python script. 
+
+ 
+  ### Python-App.py 
+  This code is used to control the call made by the Flask server when selecting the option from the UI, and to be able to run the script from port 5000, so every time the program was initialized, it would only open it from the port already set up.
+
+
+  ### Java - CapturaController.java
+
+  
+This code was used to call the function from app.py to initialize the port and also processed the obtained information to send it to the database.
+
+It was not an easy task at all, but it was completed. I had a few problems when dockerizing it and uploading it to a domain, so Cesar took care of that since he knows someone who could help us.
+
+Additionally, I also edited the video for this last submission and organized the recording and the script in English.
 </details>
