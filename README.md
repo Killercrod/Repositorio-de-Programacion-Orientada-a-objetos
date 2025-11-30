@@ -2,7 +2,7 @@
 
 Hola!! En este repositorio les explicaremos todo acerca del desarrollo de nuestro proyecto de programacion orientada a objetos les mostraremos desde nuestras expectativas, avances, metas y un registro paso paso acera de todo lo que estaremos trabajando 
 
-Link hacia el video de la primera entrega: [https://youtu.be/EcSdlB8Lhns?si=qTkY2-_YhU6EMj21](https://youtu.be/qzSQXzeVsz0)
+Link hacia el video de la ultima entrega: [https://youtu.be/EcSdlB8Lhns?si=qTkY2-_YhU6EMj21](https://youtu.be/qzSQXzeVsz0)
 
 Primero les presentaremos a cada uno de los trabajadores de nuestro proyecto:
 
