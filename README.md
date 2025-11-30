@@ -68,9 +68,17 @@ Arquitectura de sistemas: Diseño de sistema en tiempo real con componentes espe
 [Ver Requerimientos](Important/Requirements.md)
 
 
+## Diagrama de clases:
+
+[Ver Diagrama de clases](Important/Diagrama%20de%20clases.md)
+
 ## Propuesta de valor:
 
 [Ver Propuesta de valor](Important/Propuesta%20de%20valor.md)
+
+## Rango de usuarios:
+
+[Ver Rango de usuarios](Important/Rango%20de%20usuarios.md)
 
 ## Bitacora:
 
