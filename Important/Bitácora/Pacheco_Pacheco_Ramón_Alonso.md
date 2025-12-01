@@ -30,3 +30,23 @@ Grabe mis videos y audios para la segunda entrega del programa
 
 ## 5 de noviembre
 Se crearon los archivos html y css para el UI de la captura de imagen
+
+-----------------------------------
+
+## 15 de noviembre
+Se comenzo a trabajar en métodos para mejorar la captura de datos en Java
+
+-----------------------------------
+
+## 22 de noviembre
+Se mejoraron los métodos de corrección de datos
+
+-----------------------------------
+
+## 29 de noviembre
+Se terminaron los métodos de corrección de Curps
+
+-----------------------------------
+
+## 30 de noviembre
+Realice mi parte del video y ayude con detalles del programa
