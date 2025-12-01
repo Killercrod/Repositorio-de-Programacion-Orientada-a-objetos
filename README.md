@@ -82,6 +82,10 @@ Arquitectura de sistemas: Diseño de sistema en tiempo real con componentes espe
 
 [Ver Rango de usuarios](Important/Rango%20de%20usuarios.md)
 
+## Objetivos:
+
+[Ver Objetivos logrados](Important/Objetivos.md)
+
 ## Bitacora:
 
 [Bitacoras independientes](Important/Bitácora)
