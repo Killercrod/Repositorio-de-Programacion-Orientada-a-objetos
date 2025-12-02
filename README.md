@@ -95,3 +95,13 @@ Arquitectura de sistemas: Diseño de sistema en tiempo real con componentes espe
 [Tutorial de openCV](https://docs.opencv.org/4.x/d6/d00/tutorial_py_root.html)
 
 
+terminal 1
+cd demo
+mvn spring-boot:run
+
+terminal 2
+cd demo/pythoncode
+python3 -m venv .venv
+
+
+ curl -s http://localhost:4040/api/tunnels | grep -o '"public_url":"[^"]*' | grep -o '[^"]*$' | head -1

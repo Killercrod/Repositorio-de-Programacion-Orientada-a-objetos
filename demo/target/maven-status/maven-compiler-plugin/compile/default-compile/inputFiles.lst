@@ -1,0 +1,12 @@
+/Users/cesrod/Documents/GitHub/Repositorio-de-Programacion-Orientada-a-objetos/demo/src/main/java/com/example/demo/util/HibernateUtil.java
+/Users/cesrod/Documents/GitHub/Repositorio-de-Programacion-Orientada-a-objetos/demo/src/main/java/com/example/demo/model/Person.java
+/Users/cesrod/Documents/GitHub/Repositorio-de-Programacion-Orientada-a-objetos/demo/src/main/java/com/example/demo/BDconection.java
+/Users/cesrod/Documents/GitHub/Repositorio-de-Programacion-Orientada-a-objetos/demo/src/main/java/com/example/demo/controller/OCRController.java
+/Users/cesrod/Documents/GitHub/Repositorio-de-Programacion-Orientada-a-objetos/demo/src/main/java/com/example/demo/controller/OCRDataController.java
+/Users/cesrod/Documents/GitHub/Repositorio-de-Programacion-Orientada-a-objetos/demo/src/main/java/com/example/demo/repository/OCRDataRepository.java
+/Users/cesrod/Documents/GitHub/Repositorio-de-Programacion-Orientada-a-objetos/demo/src/main/java/com/example/demo/dao/PersonDAO.java
+/Users/cesrod/Documents/GitHub/Repositorio-de-Programacion-Orientada-a-objetos/demo/src/main/java/com/example/demo/model/OCRData.java
+/Users/cesrod/Documents/GitHub/Repositorio-de-Programacion-Orientada-a-objetos/demo/src/main/java/com/example/demo/App.java
+/Users/cesrod/Documents/GitHub/Repositorio-de-Programacion-Orientada-a-objetos/demo/src/main/java/com/example/demo/service/OCRDataService.java
+/Users/cesrod/Documents/GitHub/Repositorio-de-Programacion-Orientada-a-objetos/demo/src/main/java/com/example/demo/exception/DuplicatePersonException.java
+/Users/cesrod/Documents/GitHub/Repositorio-de-Programacion-Orientada-a-objetos/demo/src/main/java/com/example/demo/controller/CapturaController.java

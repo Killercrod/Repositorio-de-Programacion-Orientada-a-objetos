@@ -23,7 +23,7 @@ public class CapturaController {
         return s == null ? "" : s.replace("\\", "\\\\").replace("\"", "\\\"").replace("\n", "\\n").replace("\r", "");
     }
 
-    @GetMapping(value = "/pycode", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping("/capturar-ocr")
     public ResponseEntity<String> capturarFoto() {
         String url = "http://localhost:5000/tomar-foto";
         RestTemplate restTemplate = new RestTemplate();

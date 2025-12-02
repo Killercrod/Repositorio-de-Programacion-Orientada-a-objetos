@@ -1,12 +1,19 @@
 package com.example.demo; 
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import com.example.demo.dao.PersonDAO;
+import com.example.demo.exception.DuplicatePersonException;
+import com.example.demo.model.Person;
 
 @RestController
 public class BDconection {
 
+    @Autowired
+    private PersonDAO personDAO;
+
     @PostMapping("/saludo")
-    //Llamada Request a los parametros necesarios (los datos del usuario)
     public String saludar(@RequestParam String nombre,
                           @RequestParam String apellidoPaterno,
                           @RequestParam(required = false) String apellidoMaterno,
@@ -28,10 +35,25 @@ public class BDconection {
                             + "Codigo Postal: " + codigopostal);
         System.out.println("Correo electronico: " +correo);
         System.out.println("Numero de telefono: " + telefono);
-        //System.out.println("Tel. Alterno: " + telefonoalterno);
         System.out.println("-------------------------------------------");
-        //Mensaje de retorno a la página para corroborar que se recibieron correctamente los datos
-        return "CORRECTO";
+
+        try {
+            // Crear objeto Person con los datos del formulario
+            Person persona = new Person();
+            persona.setNombre(nombre);
+            persona.setApellido(apellidoPaterno);
+            persona.setApellidoMaterno(apellidoMaterno);
+            persona.setCurp(curp);
+            // Agregar más campos si es necesario según tu entidad Person
+            
+            // Guardar en BD usando PersonDAO
+            personDAO.agregarPersona(persona);
+            
+            return "CORRECTO";
+        } catch (DuplicatePersonException e) {
+            return "ERROR: Persona duplicada - " + e.getMessage();
+        } catch (Exception e) {
+            return "ERROR: " + e.getMessage();
+        }
     }
 }
-

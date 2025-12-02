@@ -8,6 +8,7 @@ import java.util.Locale;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
+import org.springframework.stereotype.Repository;
 
 import com.example.demo.exception.DuplicatePersonException;
 import com.example.demo.model.Person;
@@ -19,6 +20,7 @@ import com.example.demo.util.HibernateUtil;
  * partir de los datos de la persona y para insertar la persona rechazando
  * duplicados cuando la clave ya existe.
  */
+@Repository
 public class PersonDAO {
 
     /**

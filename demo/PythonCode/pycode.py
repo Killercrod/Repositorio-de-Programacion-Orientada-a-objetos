@@ -6,20 +6,8 @@ import numpy as np
 import argparse
 import json
 
-#os.environ['TESSDATA_PREFIX'] = '/opt/homebrew/share/tessdata' #lap con mac
-os.environ['TESSDATA_PREFIX'] = r'C:\Program Files\Tesseract-OCR\tessdata' #lap con windows
-# Configuración del parser
-parser = argparse.ArgumentParser(
-    description="Sistema de reconocimiento de INE con opción de fuente de imagen."
-)
-# Argumento opcional para fuente de imagen
-parser.add_argument(
-    "--img-source",
-    type=str,
-    help="Ruta de archivo o URL de la imagen a procesar en lugar de usar la cámara"
-)
+os.environ['TESSDATA_PREFIX'] = '/opt/homebrew/share/tessdata'
 
-args = parser.parse_args()
 # Variables
 cuadro = 100
 doc = 0
@@ -149,11 +137,10 @@ contador_global = 0
 
 def procesar_rois(roi_nombre, roi_curp):
     """Procesa ambos ROIs (nombre y CURP) por separado y extrae datos"""
-    global doc, contador_global
+    global contador_global
     doc = 0
     # Dirección Pytesseract
-    pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe' #laptop windows
-    #pytesseract.pytesseract.tesseract_cmd = '/opt/homebrew/bin/tesseract' #laptop con mac
+    pytesseract.pytesseract.tesseract_cmd = '/opt/homebrew/bin/tesseract'
 
     # Incrementar contador para nuevo procesamiento
     contador_global += 1
@@ -163,130 +150,111 @@ def procesar_rois(roi_nombre, roi_curp):
     texto_nombre = mejorar_reconocimiento_texto(roi_nombre, contador_global*10)
     texto_curp = mejorar_reconocimiento_texto(roi_curp, contador_global*10 + 1)
     
-    # Combinar textos
-    texto_combinado = texto_nombre + " " + texto_curp
+    # Limpiar textos
+    texto_nombre_limpio = re.sub(r'\s+', ' ', texto_nombre.strip())
+    texto_curp_limpio = re.sub(r'\s+', ' ', texto_curp.strip())
     
-    # Limpieza del texto
-    texto = re.sub(r'[^A-Z0-9\s]', '', texto_combinado.upper())
-
+    # Buscar CURP
     patron_curp = r'[A-Z]{4}[0-9]{6}[HMX]{1}[A-Z]{5}[A-Z0-9]{1}[0-9]{1}'
-    busqueda1 = re.findall(patron_curp, texto)
-
-    # Misma verificación original pero solo con nombre y curp
-    if len(busqueda1) != 0:
-        doc = 1
-
+    curp_encontrada = re.findall(patron_curp, texto_curp_limpio.upper())
+    
+    # Determinar si se identificó documento
+    documento_identificado = len(curp_encontrada) > 0
+    
+    # Generar JSON completo
+    datos_json = {
+        "documento_identificado": documento_identificado,
+        "curp_encontrada": curp_encontrada[0] if curp_encontrada else "",
+        "texto_nombre": texto_nombre_limpio[:200],
+        "texto_curp": texto_curp_limpio[:200],
+        "procesamiento_exitoso": True,
+        "contador_procesamiento": contador_global
+    }
+    
     print("="*50)
     print(f"PROCESAMIENTO {contador_global}")
     print("="*50)
-    print("Texto NOMBRE detectado:", texto_nombre)
-    print("Texto CURP detectado:", texto_curp)
-    print(f"Coincidencias - CURP: {len(busqueda1)}")
-    print(f"Documento identificado: {'SI' if doc == 1 else 'NO'}")
-    print("="*50)
-    
-    # Generar JSON básico con CURP
-    datos_json = {
-
-        "texto_nombre": texto_nombre[:200],
-        "texto_curp": texto_curp[:200]
-    }
-    
-    print("DATOS CURP EN JSON:")
-    print(json.dumps(datos_json, indent=2, ensure_ascii=False))
+    print("Texto NOMBRE detectado:", texto_nombre_limpio)
+    print("Texto CURP detectado:", texto_curp_limpio)
+    print(f"Coincidencias - CURP: {len(curp_encontrada)}")
+    print(f"Documento identificado: {'SI' if documento_identificado else 'NO'}")
     print("="*50)
     
     return datos_json
 
- # Modo cámara
-def tomar_foto_y_guardar():
-    """Abre la cámara y espera a que el usuario presione 'S' para capturar.
-    Devuelve el JSON procesado o None si se cancela/error."""
-    global contador_global
-    import json
-
-    cap = cv2.VideoCapture(0)
-    cap.set(3, 1280)
-    cap.set(4, 740)
-
-    roi_nombre_pos = (530, 280)
-    roi_nombre_tam = (160, 85)
-    roi_curp_pos = (500, 480)
-    roi_curp_tam = (250, 30)
-
-    while True:
-        ret, frame = cap.read()
-        margenx = 305
-        margeny = 150
-
-        cv2.putText(frame,'Ubique el documento a identificar',(450,80 - cuadro),cv2.FONT_HERSHEY_SCRIPT_SIMPLEX, 0.71,(0,255,0),2)
-        cv2.rectangle(frame,(margenx,margeny),(1280 - margenx, 720 - margeny), (0,255,0), 2)
-
-        if not ret or frame is None:
-            print("Error: No se pudo capturar el frame. ¿Cámara conectada?")
-            break
-
-        nombre_tl = roi_nombre_pos
-        nombre_br = (roi_nombre_pos[0] + roi_nombre_tam[0], roi_nombre_pos[1] + roi_nombre_tam[1])
-        curp_tl = roi_curp_pos
-        curp_br = (roi_curp_pos[0] + roi_curp_tam[0], roi_curp_pos[1] + roi_curp_tam[1])
-
-        cv2.rectangle(frame, nombre_tl, nombre_br, (0, 255, 0), 2)
-        cv2.rectangle(frame, curp_tl, curp_br, (255, 0, 0), 2)
-        cv2.putText(frame, 'NOMBRE', (nombre_tl[0], nombre_tl[1] - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 255, 0), 2)
-        cv2.putText(frame, 'CURP', (curp_tl[0], curp_tl[1] - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 0, 0), 2)
-        cv2.putText(frame,'Presiona S para identificar',(470,750 - cuadro),cv2.FONT_HERSHEY_SCRIPT_SIMPLEX, 0.71,(0,255,0),2)
-
-        t = cv2.waitKey(5)
-        cv2.imshow('ID INTELIGENTE',frame)
-
-        if t == 27:  # ESC
-            break
-        elif t == 83 or t == 115:  # S
-            roi_nombre = frame[nombre_tl[1]:nombre_br[1], nombre_tl[0]:nombre_br[0]]
-            roi_curp = frame[curp_tl[1]:curp_br[1], curp_tl[0]:curp_br[0]]
-            camara_json = procesar_rois(roi_nombre, roi_curp)
-            cap.release()
-            cv2.destroyAllWindows()
-            return camara_json
-
-    cap.release()
-    cv2.destroyAllWindows()
-    return None
-
-#PROTEGE TODO EL CODIGO 
-if __name__ == "__main__":
-# Modo imagen estática vs modo cámara
- if args.img_source:
-    print(f"Procesando imagen: {args.img_source}")
-    
-    # Cargar imagen desde archivo
-    imagen = cv2.imread(args.img_source)
+def procesar_imagen_completa(ruta_imagen):
+    """Procesa una imagen completa de INE y extrae datos"""
+    # Cargar imagen
+    imagen = cv2.imread(ruta_imagen)
     if imagen is None:
-        print(f"Error: No se pudo cargar la imagen {args.img_source}")
-        exit()
+        print(f"Error: No se pudo cargar la imagen {ruta_imagen}")
+        return {"error": "No se pudo cargar la imagen", "procesamiento_exitoso": False}
     
-    # Procesar la imagen completa (usando función antigua para compatibilidad)
-    def texto(imagen):
-        # Esta función es solo para modo estático
-        return procesar_rois(imagen, imagen)  # Usamos la misma imagen para ambos ROIs
+    # Redimensionar si es necesario para estandarizar (mismo tamaño que en modo cámara)
+    alto, ancho = imagen.shape[:2]
+    if ancho != 505 or alto != 319:
+        imagen = cv2.resize(imagen, (505, 319))
+        print(f"Imagen redimensionada a 505x319 (original: {ancho}x{alto})")
+#     Verde:Nombre
+# * 		top: 75px;
+# * 		
+# * 		    left: 148px;
+# * 		
+# * 		    width: 132px;
+# * 		
+# * 		    height: 79px;
+# Azul:Curp
+# * 		top: 252px;
+# * 		
+# * 		    left: 148px;
+# * 		
+# * 		    width: 150px;
+# * 		
+# * 		    height: 24px;
+    # Definir ROIs (regiones de interés) - mismas coordenadas que en modo cámara
+    # ROI para NOMBRE (Verde)
+    roi_nombre = imagen[148:148+79, 75:75+132]
     
-    datos = texto(imagen)
+    # ROI para CURP (Azul)
+    roi_curp = imagen[148:148+24, 252:252+150]
     
-    # Guardar JSON en archivo
-    nombre_archivo = os.path.splitext(os.path.basename(args.img_source))[0]
-    ruta_json = f"pasos_procesamiento/{nombre_archivo}_curp.json"
-    
-    with open(ruta_json, 'w', encoding='utf-8') as f:
-        json.dump(datos, f, indent=2, ensure_ascii=False)
-    
-    print(f" Datos CURP guardados en: {ruta_json}")
-  
-    # Esperar a que el usuario presione una tecla para cerrar las ventanas
-    print("Presiona cualquier tecla en una de las ventanas de imagen para cerrar...")
-    cv2.waitKey(0)
-    cv2.destroyAllWindows()
-    exit()  # Salir después de procesar la imagen
+    # Procesar los ROIs
+    return procesar_rois(roi_nombre, roi_curp)
 
-else:
-   tomar_foto_y_guardar()
+# Esto solo se ejecuta si el archivo se ejecuta directamente, no cuando se importa
+if __name__ == '__main__':
+    # Configuración del parser - SOLO cuando se ejecuta directamente
+    parser = argparse.ArgumentParser(
+        description="Sistema de reconocimiento de INE con opción de fuente de imagen."
+    )
+    # Argumento obligatorio para fuente de imagen
+    parser.add_argument(
+        "--img-source",
+        type=str,
+        required=True,
+        help="Ruta de archivo de la imagen a procesar"
+    )
+
+    args = parser.parse_args()
+    
+    # Solo procesamos la imagen proporcionada como argumento
+    if args.img_source:
+        print(f"Procesando imagen: {args.img_source}")
+        
+        datos = procesar_imagen_completa(args.img_source)
+        
+        # Guardar JSON en archivo
+        nombre_archivo = os.path.splitext(os.path.basename(args.img_source))[0]
+        ruta_json = f"pasos_procesamiento/{nombre_archivo}_procesado.json"
+        
+        with open(ruta_json, 'w', encoding='utf-8') as f:
+            json.dump(datos, f, indent=2, ensure_ascii=False)
+        
+        print(f"Datos guardados en: {ruta_json}")
+        
+        # Imprimir JSON para que Flask lo capture (última línea de salida)
+        print(json.dumps(datos, ensure_ascii=False))
+        
+    else:
+        print("Error: Se requiere --img-source con la ruta de la imagen")
+        exit(1)
