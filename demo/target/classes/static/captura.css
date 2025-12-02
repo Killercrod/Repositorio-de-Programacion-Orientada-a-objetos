@@ -36,8 +36,8 @@ main {
 }
 
 .marco {
-  width: 505px;
-  height: 319px; 
+  width: 1010px;
+  height: 638px; 
   border: 4px solid #7c1f3a;
   box-sizing: border-box;
   border-radius: 6px;
@@ -70,22 +70,21 @@ main {
 /* ROI para NOMBRE (Verde) */
 .roi-nombre {
   position: absolute;
-	top: 75px;
-	left: 148px;
-	width: 132px;
-	height: 79px; /* 85px de 400px */
+  top: 23.51%;
+  left: 29.31%;
+  width: 26.14%;
+  height: 24.76%;
   border: 3px solid #00ff00;
   background-color: rgba(0, 255, 0, 0.3);
   box-sizing: border-box;
 }
 
-/* ROI para CURP (Azul) */
 .roi-curp {
   position: absolute;
-  top: 252px;
-  left: 148px;
-  width: 150px;
-  height: 24px;  /* 30px de 400px */
+  top: 79.0%;
+  left: 29.31%;
+  width: 29.70%;
+  height: 7.52%;
   border: 3px solid #0080ff;
   background-color: rgba(0, 128, 255, 0.3);
   box-sizing: border-box;
