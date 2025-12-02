@@ -213,10 +213,10 @@ def procesar_imagen_completa(ruta_imagen):
 # * 		    height: 24px;
     # Definir ROIs (regiones de interés) - mismas coordenadas que en modo cámara
     # ROI para NOMBRE (Verde)
-    roi_nombre = imagen[148:148+79, 75:75+132]
+    roi_nombre = imagen[75:75+79, 148:148+132]
     
     # ROI para CURP (Azul)
-    roi_curp = imagen[148:148+24, 252:252+150]
+    roi_curp = imagen[252:252+24, 148:148+150]
     
     # Procesar los ROIs
     return procesar_rois(roi_nombre, roi_curp)
