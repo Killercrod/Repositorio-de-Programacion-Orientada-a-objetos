@@ -95,3 +95,27 @@ button {
 button:hover {
   background-color: #2aa52a;
 }
+#btnRegresar {
+  background-color: #9c2b52;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 1em;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-right: 10px;
+
+}
+
+#btnRegresar:hover {
+  background-color: #2aa52a;
+}
+
+footer {
+  background-color: #9c2b52;
+  padding: 20px;
+
+  display: flex;
+  justify-content: space-between;  /* ← ESTO DISTRIBUYE IZQ / DER */
+  align-items: center;
+}

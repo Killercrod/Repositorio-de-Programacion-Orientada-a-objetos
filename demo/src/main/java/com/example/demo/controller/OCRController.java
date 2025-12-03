@@ -12,7 +12,12 @@ import java.util.Map;
 
 @RestController
 public class OCRController {
-
+    @CrossOrigin(
+            origins = "*",
+            allowedHeaders = "*",
+            methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE},
+            allowCredentials = "false"
+    )
     @PostMapping("/procesar-ine")
     public ResponseEntity<?> procesarINE(@RequestParam("foto") MultipartFile foto) {
         try {
