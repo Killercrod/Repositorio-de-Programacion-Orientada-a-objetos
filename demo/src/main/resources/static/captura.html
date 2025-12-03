@@ -14,7 +14,7 @@
     <main>
       <div class="marco">
         <video id="video" autoplay playsinline></video>
-        <canvas id="canvas" style="display:none;"></canvas>
+        <canvas id="canvas" width="1010px" height="638px" style="display:none;"></canvas>
         
         <!-- OVERLAY CON ROIS - NUEVO -->
         <div class="overlay-rois">
@@ -24,15 +24,12 @@
           <div class="roi-curp">
             <div class="roi-label">CURP</div>
           </div>
-          <div class="instrucciones">
-            Asegúrese que el NOMBRE y CURP estén dentro de los recuadros coloreados
-          </div>
         </div>
       </div>
     </main>
     <footer>
       <button id="btnRegresar" onclick="window.location.href='index.html'">⬅ Regresar</button>
-      <button id="btnCapturar">📸 Capturar INE</button>
+      <button id="btnCapturar"> Capturar INE</button>
     </footer>
   </div>
 
@@ -58,17 +55,60 @@
         alert('No se pudo acceder a la cámara. Permite el acceso a la cámara.');
       }
     }
+  //   function takePhoto() {
+  // const videoAspect = video.videoWidth / video.videoHeight;
+  // const canvasAspect = canvas.width / canvas.height;
 
+  // let sx, sy, sWidth, sHeight;
+
+  // if (videoAspect > canvasAspect) {
+  //   // Video is wider than our frame: crop sides
+  //   sHeight = video.videoHeight;
+  //   sWidth = sHeight * canvasAspect;
+  //   sx = (video.videoWidth - sWidth) / 2;
+  //   sy = 0;
+  // } else {
+  //   // Video is taller than our frame: crop top/bottom
+  //   sWidth = video.videoWidth;
+  //   sHeight = sWidth / canvasAspect;
+  //   sx = 0;
+  //   sy = (video.videoHeight - sHeight) / 2;
+  // }
+
+  // ctx.drawImage(
+  //   video,
+  //   sx, sy, sWidth, sHeight,   // source rect (from video)
+  //   0, 0, canvas.width, canvas.height // destination rect (canvas)
+  // );}
     // Capturar foto
     btnCapturar.addEventListener('click', async () => {
       btnCapturar.disabled = true;
       btnCapturar.textContent = 'Procesando...';
       
       const context = canvas.getContext('2d');
-      canvas.width = video.videoWidth;
-      canvas.height = video.videoHeight;
-      context.drawImage(video, 0, 0, canvas.width, canvas.height);
+      const videoAspect = video.videoWidth / video.videoHeight;
+  const canvasAspect = canvas.width / canvas.height;
 
+  let sx, sy, sWidth, sHeight;
+
+  if (videoAspect > canvasAspect) {
+    // Video is wider than our frame: crop sides
+    sHeight = video.videoHeight;
+    sWidth = sHeight * canvasAspect;
+    sx = (video.videoWidth - sWidth) / 2;
+    sy = 0;
+  } else {
+    // Video is taller than our frame: crop top/bottom
+    sWidth = video.videoWidth;
+    sHeight = sWidth / canvasAspect;
+    sx = 0;
+    sy = (video.videoHeight - sHeight) / 2;
+  }
+context.drawImage(
+    video,
+    sx, sy, sWidth, sHeight,   // source rect (from video)
+    0, 0, canvas.width, canvas.height // destination rect (canvas)
+  );
       // Detener cámara
       if (stream) {
         stream.getTracks().forEach(track => track.stop());

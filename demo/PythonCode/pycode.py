@@ -5,7 +5,7 @@ import os
 import numpy as np
 import argparse
 import json
-
+from datetime import datetime
 os.environ['TESSDATA_PREFIX'] = '/opt/homebrew/share/tessdata'
 
 # Variables
@@ -60,28 +60,28 @@ def preprocesamiento_avanzado(imagen, contador_procesamiento=0):
     """Pipeline completo de preprocesamiento para INE"""
     
     # Guardar imagen original
-    cv2.imwrite(f"pasos_procesamiento/{contador_procesamiento:02d}_original.jpg", imagen)
+    cv2.imwrite(f"pasos_procesamiento/{contador_procesamiento}_original.jpg", imagen)
     
     # Paso 1: Eliminar sombras
     sin_sombra = eliminar_sombra(imagen)
-    cv2.imwrite(f"pasos_procesamiento/{contador_procesamiento:02d}_01_sin_sombra.jpg", sin_sombra)
+    cv2.imwrite(f"pasos_procesamiento/{contador_procesamiento}_01_sin_sombra.jpg", sin_sombra)
     
     # Paso 2: Mejorar contraste
     alto_contraste = mejorar_contraste(sin_sombra)
-    cv2.imwrite(f"pasos_procesamiento/{contador_procesamiento:02d}_02_alto_contraste.jpg", alto_contraste)
+    cv2.imwrite(f"pasos_procesamiento/{contador_procesamiento}_02_alto_contraste.jpg", alto_contraste)
     
     # Paso 3: Convertir a escala de grises
     gris = cv2.cvtColor(alto_contraste, cv2.COLOR_BGR2GRAY)
-    cv2.imwrite(f"pasos_procesamiento/{contador_procesamiento:02d}_03_grises.jpg", gris)
+    cv2.imwrite(f"pasos_procesamiento/{contador_procesamiento}_03_grises.jpg", gris)
     
     # Paso 4: Filtro bilateral para reducir ruido preservando bordes
     gris_suavizado = cv2.bilateralFilter(gris, 5, 50, 50)
-    cv2.imwrite(f"pasos_procesamiento/{contador_procesamiento:02d}_04_bilateral_filter.jpg", gris_suavizado)
+    cv2.imwrite(f"pasos_procesamiento/{contador_procesamiento}_04_bilateral_filter.jpg", gris_suavizado)
     
     # Paso 5: Ecualización local del histograma
     clahe = cv2.createCLAHE(clipLimit=1.0, tileGridSize=(8, 8))
     gris_ecualizado = clahe.apply(gris_suavizado)
-    cv2.imwrite(f"pasos_procesamiento/{contador_procesamiento:02d}_05_clahe.jpg", gris_ecualizado)
+    cv2.imwrite(f"pasos_procesamiento/{contador_procesamiento}_05_clahe.jpg", gris_ecualizado)
     
     # Paso 6: Umbral adaptativo con parámetros optimizados
     umbral = cv2.adaptiveThreshold(
@@ -89,17 +89,17 @@ def preprocesamiento_avanzado(imagen, contador_procesamiento=0):
         cv2.ADAPTIVE_THRESH_GAUSSIAN_C, 
         cv2.THRESH_BINARY, 41, 15
     )
-    cv2.imwrite(f"pasos_procesamiento/{contador_procesamiento:02d}_06_umbral_adaptativo.jpg", umbral)
+    cv2.imwrite(f"pasos_procesamiento/{contador_procesamiento}_06_umbral_adaptativo.jpg", umbral)
     
     # Paso 7: EROSIÓN MORFOLÓGICA (Separación agresiva)
     umbral_invertido = cv2.bitwise_not(umbral)
     kernel = np.ones((1, 1), np.uint8)
     erosion = cv2.erode(umbral_invertido, kernel, iterations=2)
-    cv2.imwrite(f"pasos_procesamiento/{contador_procesamiento:02d}_07_erosion.jpg", erosion)
+    cv2.imwrite(f"pasos_procesamiento/{contador_procesamiento}_07_erosion.jpg", erosion)
     
     # Paso 8: OPENING MORFOLÓGICO (Reparación y limpieza)
     opening = cv2.morphologyEx(erosion, cv2.MORPH_OPEN, kernel)
-    cv2.imwrite(f"pasos_procesamiento/{contador_procesamiento:02d}_08_opening.jpg", opening)
+    cv2.imwrite(f"pasos_procesamiento/{contador_procesamiento}_08_opening.jpg", opening)
     
     return opening
 
@@ -110,7 +110,7 @@ def mejorar_reconocimiento_texto(imagen, contador_procesamiento=0):
     imagen_procesada = preprocesamiento_avanzado(imagen, contador_procesamiento)
     
     # Guardar resultado final del preprocesamiento
-    cv2.imwrite(f"pasos_procesamiento/{contador_procesamiento:02d}_09_resultado_final.jpg", imagen_procesada)
+    cv2.imwrite(f"pasos_procesamiento/{contador_procesamiento}_09_resultado_final.jpg", imagen_procesada)
     
     # Configuraciones optimizadas de OCR
     configuraciones = [
@@ -145,10 +145,11 @@ def procesar_rois(roi_nombre, roi_curp):
     # Incrementar contador para nuevo procesamiento
     contador_global += 1
     print(f"Iniciando procesamiento {contador_global}")
-
+    now = datetime.now()
+    formatted = now.strftime("%Y%m%d%H%M%S")
     # Procesar cada ROI individualmente
-    texto_nombre = mejorar_reconocimiento_texto(roi_nombre, contador_global*10)
-    texto_curp = mejorar_reconocimiento_texto(roi_curp, contador_global*10 + 1)
+    texto_nombre = mejorar_reconocimiento_texto(roi_nombre, f"{formatted}_nombre")
+    texto_curp = mejorar_reconocimiento_texto(roi_curp, f"{formatted}_curp")
     
     # Limpiar textos
     texto_nombre_limpio = re.sub(r'\s+', ' ', texto_nombre.strip())

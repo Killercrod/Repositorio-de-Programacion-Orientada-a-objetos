@@ -34,10 +34,25 @@ main {
   align-items: center;
   position: relative;
 }
+frame {
+  width: 100%;               /* responsive */
+  max-width: 1010px;         /* optional */
+  aspect-ratio: 1010 / 638;  /* keeps proportions */
+  position: relative;
+  overflow: hidden;
+}
 
+.frame video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;         /* fills frame, crops extra */
+}
 .marco {
-  width: 1010px;
-  height: 638px; 
+  width: 100%;
+  max-width: 1010px; 
+  aspect-ratio: 1010 / 638;  /* keeps proportions */       
   border: 4px solid #7c1f3a;
   box-sizing: border-box;
   border-radius: 6px;
@@ -53,6 +68,8 @@ main {
 .marco video {
   width: 100%;
   height: 100%;
+  position: absolute;
+  inset: 0;  
   object-fit: cover; /* Contiene el video sin recortar */
 }
 
@@ -114,19 +131,7 @@ main {
   left: 0;
 }
 
-/* Instrucciones */
-.instrucciones {
-  position: absolute;
-  bottom: 10px;
-  left: 0;
-  width: 100%;
-  text-align: center;
-  color: white;
-  font-size: 14px;
-  background-color: rgba(0, 0, 0, 0.7);
-  padding: 5px;
-  z-index: 4;
-}
+
 
 footer {
   background-color: #9c2b52; 
@@ -153,84 +158,28 @@ footer {
   background-color: #cccccc;
   cursor: not-allowed;
 }
+/* .roi-nombre {
+  position: absolute;
+  top: 23.51%;
+  left: 29.31%;
+  width: 26.14%;
+  height: 24.76%;
+  border: 3px solid #00ff00;
+  background-color: rgba(0, 255, 0, 0.3);
+  box-sizing: border-box;
+}
+
+.roi-curp {
+  position: absolute;
+  top: 79.0%;
+  left: 29.31%;
+  width: 29.70%;
+  height: 7.52%;
+  border: 3px solid #0080ff;
+  background-color: rgba(0, 128, 255, 0.3);
+  box-sizing: border-box;
+}*/
 /* ================================
       ADAPTACIÓN PARA TELÉFONOS
    ================================ */
-@media (max-width: 768px) {
 
-  .marco {
-    width: 350px;     /* Ocupa casi toda la pantalla */
-    height: 260px;    /* Mantiene proporción en celular */
-    border-width: 3px;
-  }
-
-  .marco video {
-    object-fit: cover;   /* Para que llene mejor sin barras negras */
-  }
-
-  /* ROI NOMBRE (verde) ajustado a celular */
-  .roi-nombre {
-    top: 25%;
-    left: 10%;
-    width: 80%;
-    height: 24%;
-  }
-
-  /* ROI CURP (azul) ajustado a celular */
-  .roi-curp {
-    top: 78%;
-    left: 10%;
-    width: 80%;
-    height: 10%;
-  }
-
-  /* Etiquetas ROI más pequeñas */
-  .roi-label {
-    font-size: 10px;
-    top: -20px;
-  }
-
-  .instrucciones {
-    font-size: 12px;
-    padding: 4px;
-  }
-
-  header {
-    font-size: 1.2em;
-    padding: 10px 0;
-  }
-
-  #btnCapturar {
-    width: 90%;
-    font-size: 1em;
-    padding: 12px;
-  }
-  #btnRegresar {
-  background-color: #2aa52a;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  font-size: 1em;
-  border-radius: 5px;
-  cursor: pointer;
-  margin-right: 10px;
-}
-
-#btnRegresar:hover {
-  background-color: #7c1f3a;
-}
-#btnCapturar {
-  background-color: #4CAF50;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  font-size: 1.2em;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-#btnCapturar:hover {
-  background-color: #45a049;
-}
-}
