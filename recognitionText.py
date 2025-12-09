@@ -2,7 +2,8 @@ import cv2
 import pytesseract
 import re
 import os
-os.environ['TESSDATA_PREFIX'] = '/opt/homebrew/share/tessdata'
+#os.environ['TESSDATA_PREFIX'] = '/opt/homebrew/share/tessdata'
+os.environ['TESSDATA_PREFIX'] = r'C:\Program Files\Tesseract-OCR\tessdata'
 #Variables
 cuadro = 100
 doc = 0
@@ -17,7 +18,8 @@ def texto(imagen):
     
     
     # Dirección Pytesseract
-    pytesseract.pytesseract.tesseract_cmd = '/opt/homebrew/bin/tesseract'
+    #pytesseract.pytesseract.tesseract_cmd = '/opt/homebrew/bin/tesseract'
+    pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
   
     #Escala de grises
     gris = cv2.cvtColor(imagen, cv2.COLOR_BGR2GRAY)
