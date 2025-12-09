@@ -1,0 +1,185 @@
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #7c1f3a;
+  font-family: 'Poppins', sans-serif;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.contenedor {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+header {
+  background-color: #7c1f3a;
+  text-align: center;
+  padding: 20px 0;
+  font-size: 1.5em;
+  letter-spacing: 1px;
+}
+
+main {
+  background-color: #e8e8e8; 
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+frame {
+  width: 100%;               /* responsive */
+  max-width: 1010px;         /* optional */
+  aspect-ratio: 1010 / 638;  /* keeps proportions */
+  position: relative;
+  overflow: hidden;
+}
+
+.frame video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;         /* fills frame, crops extra */
+}
+.marco {
+  width: 100%;
+  max-width: 1010px; 
+  aspect-ratio: 1010 / 638;  /* keeps proportions */       
+  border: 4px solid #7c1f3a;
+  box-sizing: border-box;
+  border-radius: 6px;
+  z-index: 2;
+  margin: auto;
+  inset: 0;
+  position: relative;
+  overflow: hidden;
+  background-color: black;
+}
+
+/* Asegurar que el video ocupe todo el marco */
+.marco video {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  inset: 0;  
+  object-fit: cover; /* Contiene el video sin recortar */
+}
+
+/* OVERLAY CON ROIS - NUEVO */
+.overlay-rois {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none; /* Permite interactuar con el video debajo */
+  z-index: 3;
+}
+
+/* ROI para NOMBRE (Verde) */
+.roi-nombre {
+  position: absolute;
+  top: 23.51%;
+  left: 29.31%;
+  width: 26.14%;
+  height: 24.76%;
+  border: 3px solid #00ff00;
+  background-color: rgba(0, 255, 0, 0.3);
+  box-sizing: border-box;
+}
+
+.roi-curp {
+  position: absolute;
+  top: 79.0%;
+  left: 29.31%;
+  width: 29.70%;
+  height: 7.52%;
+  border: 3px solid #0080ff;
+  background-color: rgba(0, 128, 255, 0.3);
+  box-sizing: border-box;
+}
+.overlay-rois {
+  z-index: 10 !important;
+}
+/* Etiquetas para los ROIs */
+.roi-label {
+  position: absolute;
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+  background-color: rgba(0, 0, 0, 0.7);
+  padding: 2px 6px;
+  border-radius: 3px;
+  pointer-events: none;
+}
+
+.roi-nombre .roi-label {
+  top: -25px;
+  left: 0;
+}
+
+.roi-curp .roi-label {
+  top: -25px;
+  left: 0;
+}
+
+
+
+footer {
+  background-color: #9c2b52; 
+  text-align: center;
+  padding: 20px 0;
+}
+
+#btnCapturar {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 15px 30px;
+  font-size: 1.2em;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+#btnCapturar:hover {
+  background-color: #45a049;
+}
+
+#btnCapturar:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+/* .roi-nombre {
+  position: absolute;
+  top: 23.51%;
+  left: 29.31%;
+  width: 26.14%;
+  height: 24.76%;
+  border: 3px solid #00ff00;
+  background-color: rgba(0, 255, 0, 0.3);
+  box-sizing: border-box;
+}
+
+.roi-curp {
+  position: absolute;
+  top: 79.0%;
+  left: 29.31%;
+  width: 29.70%;
+  height: 7.52%;
+  border: 3px solid #0080ff;
+  background-color: rgba(0, 128, 255, 0.3);
+  box-sizing: border-box;
+}*/
+/* ================================
+      ADAPTACIÓN PARA TELÉFONOS
+   ================================ */
+

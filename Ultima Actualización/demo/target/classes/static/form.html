@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Formulario de Registro</title>
+  <link rel="stylesheet" href="form.css">
+</head>
+<body>
+  <header><head_title>Formulario</head_title></header>
+  <main>
+    <!-- Script para precargar datos OCR -->
+    <script>
+      // Precargar datos OCR si existen
+      document.addEventListener('DOMContentLoaded', function() {
+        const datosOCR = localStorage.getItem('datosOCR');
+        if (datosOCR) {
+          try {
+            const datos = JSON.parse(datosOCR);
+            console.log('Datos OCR recibidos:', datos);
+            
+            // Precargar campos con datos del OCR
+            // Priorizar CURP formal encontrada, si no existe usar el texto detectado
+           if (datos.texto_curp) {
+              // algunos OCRs devuelven un bloque de texto en lugar de una CURP validada
+              document.getElementById('curp').value = datos.texto_curp;
+            }
+            if (datos.texto_nombre) {
+              // Intentar separar nombre y apellidos (lógica básica)
+              const partes = datos.texto_nombre.split(' ');
+              if (partes.length >= 1) {
+                document.getElementById('nombre').value = partes[0];
+              }
+              if (partes.length >= 2) {
+                document.getElementById('apePater').value = partes[1];
+              }
+              if (partes.length >= 3) {
+                document.getElementById('apeMater').value = partes.slice(2).join(' ');
+              }
+            }
+            
+            // Limpiar localStorage después de usar
+            localStorage.removeItem('datosOCR');
+            
+            alert('Datos de INE cargados. Revise y confirme la información.');
+          } catch (e) {
+            console.error('Error al procesar datos OCR:', e);
+          }
+        }
+      });
+    </script>
+
+    <form class="formulario">
+      <div class="fila">
+        <div class="campo">
+          <label>Nombre(s)<span>*</span></label>
+          <input id="nombre" type="text" required>
+        </div>
+        <div class="campo">
+          <label>Apellido Paterno<span>*</span></label>
+          <input id="apePater" type="text" required>
+        </div>
+        <div class="campo">
+          <label>Apellido Materno</label>
+          <input id="apeMater" type="text">
+        </div>
+      </div>
+
+      <div class="fila">
+        <div class="campo">
+          <label>CURP<span>*</span></label>
+          <input id="curp" type="text" required>
+        </div>
+      </div>
+
+      <div class="fila">
+        <div class="campo">
+          <label>Dirección<span>*</span></label>
+          <input id="direccion" type="text" required>
+        </div>
+        <div class="campo">
+          <label>Cruzamiento<span>*</span></label>
+          <input id="cruzamientos" type="text" required>
+        </div>
+        <div class="campo">
+          <label>Código Postal<span>*</span></label>
+          <input id="cp" type="text" placeholder="Ej. 99999" required>
+        </div>
+      </div>
+
+      <div class="fila">
+        <div class="campo">
+          <label>Correo Electrónico<span>*</span></label>
+          <input id="correo" type="email" placeholder="Correo@Ejemplo.com" required>
+        </div>
+        <div class="campo">
+          <label>Número Telefónico<span>*</span></label>
+          <input id="telefono" type="tel" placeholder="Ej. 9990009999" required>
+        </div>
+      </div>
+
+      <p class="nota"><span>*</span> Campo Obligatorio</p><br>
+
+      <div class="boton">
+        <button id="btnRegresar" onclick="window.location.href='index.html'">⬅ Regresar</button>
+        <button type="button" onclick="enviar()">Enviar</button>  
+      </div>
+    </form>
+  </main>
+
+  <!-- JavaScript ORIGINAL - SE MANTIENE IGUAL -->
+  <script src="scriptserver.js"></script>
+</body>
+</html>
