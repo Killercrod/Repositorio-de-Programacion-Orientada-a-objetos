@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Formulario de Registro</title>
+  <link rel="stylesheet" href="Formulario.css">
+</head>
+<body>
+  <header><a href="index.html" class="boton-regresar">⟵ Regresar</a></header> <!-- EN HREF ES DONDE VA A DONDE VA A MANDAR AL USUARIO TRAS PRESIONAR EL BOTON -->
+  <main>
+    <form class="formulario">
+      <div class="fila">
+        <div class="campo">
+          <label>Nombre(s)<span>*</span></label>
+          <input type="text" required>
+        </div>
+        <div class="campo">
+          <label>Apellido Paterno<span>*</span></label>
+          <input type="text" required>
+        </div>
+        <div class="campo">
+          <label>Apellido Materno</label>
+          <input type="text">
+        </div>
+      </div>
+
+      <div class="fila">
+        <div class="campo">
+          <label>CURP<span>*</span></label>
+          <input type="text" minlength="18" maxlength="18" required>
+        </div>
+        <div class="campo">
+          <label>Fecha de Nacimiento<span>*</span></label>
+          <input type="date" max="" required>
+        </div>
+      </div>
+
+      <div class="fila">
+        <div class="campo">
+          <label>Dirección<span>*</span></label>
+          <input type="text" required>
+        </div>
+        <div class="campo">
+          <label>Cruzamiento<span>*</span></label>
+          <input type="text" required>
+        </div>
+        <div class="campo">
+          <label>Código Postal<span>*</span></label>
+          <input type="number" placeholder="Ej. 99999" min="01000" max="99999" required>
+        </div>
+      </div>
+
+      <div class="fila">
+        <div class="campo">
+          <label>Correo Electrónico<span>*</span></label>
+          <input type="email" placeholder="Correo@Ejemplo.com" pattern="^[^@\s]+@[^@\s]+\.[^@\s]+$" required>
+        </div>
+        <div class="campo">
+          <label>Número Telefónico<span>*</span></label>
+          <input type="tel" placeholder="Ej. 9990009999" pattern="[0-9]{10}" required>
+        </div>
+      </div>
+
+      <p class="nota"><span>*</span> Campo Obligatorio</p>
+
+      <div class="boton">
+        <button type="submit">Enviar</button>
+      </div>
+    </form>
+  </main>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const fechaInput = document.querySelector('input[type="date"]');
+      const hoy = new Date();
+
+      const anio = hoy.getFullYear() - 18;
+      const mes = (hoy.getMonth() + 1).toString().padStart(2, '0');
+      const dia = hoy.getDate().toString().padStart(2, '0');
+
+      fechaInput.max = `${anio}-${mes}-${dia}`;
+    });
+  </script>
+
+</body>
+</html>
